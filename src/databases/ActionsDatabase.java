@@ -22,11 +22,12 @@ public class ActionsDatabase {
     ArrayList<Command> commands = new ArrayList<Command>();
     ArrayList<Query> queries = new ArrayList<Query>();
     ArrayList<Recommendation> recommendations = new ArrayList<Recommendation>();
-    JSONArray array = new JSONArray();
+//    JSONArray array = new JSONArray();
 
-    public void addActions(ArrayList<ActionInputData> actions, ActorDatabase ad,
-                           MovieDatabase md, SerialDatabase sd, UserDatabase ud, String path) throws IOException {
-        Writer writer = new Writer(path);
+    public void addActions(List<ActionInputData> actions, ActorDatabase ad,
+                           MovieDatabase md, SerialDatabase sd, UserDatabase ud,
+                           Writer writer, JSONArray array) throws IOException {
+//        Writer writer = new Writer(path);
         for (ActionInputData a : actions) {
             int id = a.getActionId();
             String actionType = a.getActionType();
@@ -50,7 +51,9 @@ public class ActionsDatabase {
 //                    this.commands.add(v);
                 } else if(type.equals("rating")) {
                     Rating r = new Rating(id, actionType, type, user, title, grade, season);
-                    r.commandMethod(ud, md, sd);
+                    String message = r.commandMethod(ud, md, sd);
+                    JSONObject object = writer.writeFile(r.getActionId(), message);
+                    array.add(object);
 //                    this.commands.add(r);
                 }
             } else if(actionType.equals("query")) {

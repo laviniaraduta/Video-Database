@@ -4,6 +4,7 @@ import entertainment.Movie;
 import fileio.MovieInputData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieDatabase {
     private ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -22,7 +23,7 @@ public class MovieDatabase {
 //    public static int getNumberOfActors() {
 //        return numberOfMovies;
 //    }
-    public void addMovies(ArrayList<MovieInputData> movies) {
+    public void addMovies(List<MovieInputData> movies) {
         for (MovieInputData m : movies) {
             String title = m.getTitle();
             int year = m.getYear();

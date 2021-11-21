@@ -5,6 +5,7 @@ import actor.ActorsAwards;
 import fileio.ActorInputData;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ActorDatabase {
@@ -24,7 +25,7 @@ public class ActorDatabase {
 //    public static int getNumberOfActors() {
 //        return numberOfActors;
 //    }
-    public void addActors(ArrayList<ActorInputData> actors) {
+    public void addActors(List<ActorInputData> actors) {
         for (ActorInputData a : actors) {
             String name = a.getName();
             String career = a.getCareerDescription();

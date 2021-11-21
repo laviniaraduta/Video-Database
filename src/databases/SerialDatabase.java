@@ -5,11 +5,12 @@ import entertainment.Serial;
 import fileio.SerialInputData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SerialDatabase {
     private ArrayList<Serial> serials = new ArrayList<Serial>();
 
-    public void addSerials(ArrayList<SerialInputData> serials) {
+    public void addSerials(List<SerialInputData> serials) {
         for (SerialInputData s : serials) {
             String title = s.getTitle();
             int year = s.getYear();

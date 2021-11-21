@@ -23,7 +23,7 @@ public class View extends Command {
         } else {
             history.put(this.getTitle(), 1);
         }
-        message = "succes -> " + this.getTitle() +
+        message = "success -> " + this.getTitle() +
                 " was viewed with total views of " +
                 history.get(this.getTitle());
         return message;
