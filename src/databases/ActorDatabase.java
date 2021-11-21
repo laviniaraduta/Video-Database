@@ -10,21 +10,6 @@ import java.util.Map;
 
 public class ActorDatabase {
     private ArrayList<Actor> actors = new ArrayList<Actor>();
-//    static int numberOfActors = 0;
-//
-//    // fac singleton
-//    private static ActorDatabase ActorDb = null;
-//    private ActorDatabase() {}
-//    public static ActorDatabase getActorDb() {
-//        if (ActorDb == null) {
-//            ActorDb = new ActorDatabase();
-//        }
-//        numberOfActors++;
-//        return ActorDb;
-//    }
-//    public static int getNumberOfActors() {
-//        return numberOfActors;
-//    }
     public void addActors(List<ActorInputData> actors) {
         for (ActorInputData a : actors) {
             String name = a.getName();

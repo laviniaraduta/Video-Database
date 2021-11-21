@@ -1,5 +1,10 @@
 package queries;
 
+import databases.ActorDatabase;
+import databases.MovieDatabase;
+import databases.SerialDatabase;
+import databases.UserDatabase;
+
 public abstract class Query {
     private int actionId;
     private String actionType;
@@ -76,5 +81,6 @@ public abstract class Query {
         this.criteria = criteria;
     }
 
-    abstract void queryMethod();
+    public abstract String queryMethod(ActorDatabase ad, UserDatabase ud,
+                                       MovieDatabase md, SerialDatabase sd);
 }

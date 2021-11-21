@@ -65,8 +65,12 @@ public class ActionsDatabase {
                 String genre = a.getGenre();
                 List<List<String>> filters = a.getFilters();
                 if(objectType.equals("actors")) {
-                    this.queries.add(new ActorQuery(id, actionType, objectType, number,
-                            user, sortType, criteria, genre, filters));
+                    ActorQuery aq = new ActorQuery(id, actionType, objectType, number,
+                            user, sortType, criteria, genre, filters);
+                    String message = aq.queryMethod(ad, ud, md, sd);
+                    JSONObject object = writer.writeFile(aq.getActionId(), message);
+                    array.add(object);
+//                    this.queries.add(aq);
                 } else if(objectType.equals("movies")) {
                     this.queries.add(new MovieQuery(id, actionType, objectType, number, user,
                             sortType, criteria, genre, filters));

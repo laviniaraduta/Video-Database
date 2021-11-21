@@ -1,5 +1,10 @@
 package queries;
 
+import databases.ActorDatabase;
+import databases.MovieDatabase;
+import databases.SerialDatabase;
+import databases.UserDatabase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +27,9 @@ public class MovieQuery extends Query {
     }
 
     @Override
-    void queryMethod() {
-
+    public String queryMethod(ActorDatabase ad, UserDatabase ud,
+                              MovieDatabase md, SerialDatabase sd) {
+        String message = null;
+        return message;
     }
 }

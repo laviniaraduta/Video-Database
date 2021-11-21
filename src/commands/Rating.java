@@ -56,7 +56,7 @@ public class Rating extends Command {
             if(typeMovie == false) {
                 if (user.getSerialsRated().containsKey(this.getTitle()) &&
                         user.getSerialsRated().get(this.getTitle()).containsKey(this.season)) {
-                        message = "error -> season already rated";
+                        message = "error -> " + this.getTitle() + " has been already rated";
                 } else {
                     Serial serial = sd.getSerialByTitle(this.getTitle());
                     serial.getSeasons().get(this.season - 1).getRatings().add(this.rating);
@@ -66,7 +66,7 @@ public class Rating extends Command {
                 }
             } else {
                 if (user.getMoviesRated().containsKey(this.getTitle())) {
-                    message = "error -> movie already rated";
+                    message = "error -> " + this.getTitle() + " has been already rated";
                 } else {
                     Movie movie = md.getMovieByTitle(this.getTitle());
                     user.getMoviesRated().put(this.getTitle(), this.rating);
@@ -80,6 +80,7 @@ public class Rating extends Command {
         } else {
             message = "error -> " + this.getTitle() + " is not seen";
         }
+//        System.out.println(message);
         return message;
     }
 }
