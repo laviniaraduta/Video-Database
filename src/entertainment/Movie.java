@@ -2,11 +2,12 @@ package entertainment;
 
 import java.util.ArrayList;
 
-public class Movie extends Video {
+public final class Movie extends Video {
     private int duration;
     private Double rating;
     private ArrayList<Double> ratings = new ArrayList<Double>();
-    public Movie(String name, Integer year, int duration, ArrayList<String> genres, ArrayList<String> cast) {
+    public Movie(final String name, final Integer year, final int duration,
+                 final ArrayList<String> genres, final ArrayList<String> cast) {
         super(name, year, cast, genres);
         this.duration = duration;
     }
@@ -15,7 +16,7 @@ public class Movie extends Video {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(final int duration) {
         this.duration = duration;
     }
 
@@ -23,6 +24,9 @@ public class Movie extends Video {
         return rating;
     }
 
+    /**
+     *
+     */
     public void setRating() {
         Double sum = 0d;
         for (Double i : this.ratings) {
@@ -34,16 +38,19 @@ public class Movie extends Video {
             this.rating = (Double) (sum / this.ratings.size());
         }
     }
-    public void addRating(Double rating) {
-        this.ratings.add(rating);
-    }
-
     public ArrayList<Double> getRatings() {
         return ratings;
     }
 
-    public void setRatings(ArrayList<Double> ratings) {
+    public void setRatings(final ArrayList<Double> ratings) {
         this.ratings = ratings;
+    }
+
+    /**
+     * @param newRating
+     */
+    public void addRating(final Double newRating) {
+        this.ratings.add(newRating);
     }
 
 

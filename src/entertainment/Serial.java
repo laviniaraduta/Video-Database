@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Serial extends Video {
+public final class Serial extends Video {
     private int numberOfSeasons;
     private Double rating;
     private ArrayList<String> cast;
@@ -12,7 +12,9 @@ public class Serial extends Video {
     private Map<Integer, Double> ratingPerSeason = new HashMap<>();
     private int totalDuration;
 
-    public Serial(String name, int year, ArrayList<String> cast, ArrayList<String> genres, int numberOfSeasons, ArrayList<Season> seasons) {
+    public Serial(final String name, final int year, final ArrayList<String> cast,
+                  final ArrayList<String> genres, final int numberOfSeasons,
+                  final ArrayList<Season> seasons) {
         super(name, year, cast, genres);
         this.numberOfSeasons = numberOfSeasons;
         this.seasons = seasons;
@@ -22,7 +24,7 @@ public class Serial extends Video {
         return numberOfSeasons;
     }
 
-    public void setNumberOfSeasons(int numberOfSeasons) {
+    public void setNumberOfSeasons(final int numberOfSeasons) {
         this.numberOfSeasons = numberOfSeasons;
     }
 
@@ -31,6 +33,9 @@ public class Serial extends Video {
         return this.rating;
     }
 
+    /**
+     *
+     */
     // seteaza ratingul total al serialului si calculeaza si ratingul/sezon
     public void setRating() {
         Double totalSum = 0d;
@@ -47,25 +52,21 @@ public class Serial extends Video {
         this.rating = (Double) (totalSum / this.numberOfSeasons);
     }
 
-    public ArrayList<String> getCast() {
-        return cast;
-    }
-
-    public void setCast(ArrayList<String> cast) {
-        this.cast = cast;
-    }
-
     public ArrayList<Season> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(ArrayList<Season> seasons) {
+    public void setSeasons(final ArrayList<Season> seasons) {
         this.seasons = seasons;
     }
 
     public Map<Integer, Double> getRatingPerSeason() {
         return ratingPerSeason;
     }
+
+    /**
+     *
+     */
     public void setTotalDuration() {
         int duration = 0;
         for (Season s : this.seasons) {

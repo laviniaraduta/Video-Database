@@ -11,52 +11,59 @@ public abstract class Command {
     private String user;
     private String title;
 
-    public Command(int actionId, String actionType, String type, String user, String title) {
+    public Command(final int actionId, final String actionType,
+                   final String type, final String user, final String title) {
         this.actionId = actionId;
         this.actionType = actionType;
         this.type = type;
         this.user = user;
         this.title = title;
     }
-    public abstract String commandMethod(UserDatabase ud, MovieDatabase md, SerialDatabase sd);
-
-    public int getActionId() {
+    public final int getActionId() {
         return actionId;
     }
 
-    public void setActionId(int actionId) {
+    public final void setActionId(final int actionId) {
         this.actionId = actionId;
     }
 
-    public String getActionType() {
+    public final String getActionType() {
         return actionType;
     }
 
-    public void setActionType(String actionType) {
+    public final void setActionType(final String actionType) {
         this.actionType = actionType;
     }
 
-    public String getType() {
+    public final String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public final void setType(final String type) {
         this.type = type;
     }
 
-    public String getUser() {
+    public final String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public final void setUser(final String user) {
         this.user = user;
     }
 
-    public String getTitle() {
+    public final String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public final void setTitle(final String title) {
         this.title = title;
     }
+
+    /**
+     * @param ud
+     * @param md
+     * @param sd
+     * @return
+     */
+    public abstract String commandMethod(UserDatabase ud, MovieDatabase md, SerialDatabase sd);
 }

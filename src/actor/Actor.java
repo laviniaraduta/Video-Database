@@ -4,21 +4,21 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import entertainment.Movie;
 import entertainment.Serial;
-import entertainment.Video;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Actor {
+public final class Actor {
     private String name;
     private String careerDescription;
     private ArrayList<String> filmography;
     private Map<ActorsAwards, Integer> awards;
     private Map<String, Double> videoRatings = new HashMap<>();
 
-    public Actor(String name, String careerDescription, ArrayList<String> filmography, Map<ActorsAwards, Integer> awards) {
+    public Actor(final String name, final String careerDescription,
+                 final ArrayList<String> filmography, final Map<ActorsAwards, Integer> awards) {
         this.name = name;
         this.careerDescription = careerDescription;
         this.filmography = filmography;
@@ -29,7 +29,7 @@ public class Actor {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -37,7 +37,7 @@ public class Actor {
         return careerDescription;
     }
 
-    public void setCareerDescription(String careerDescription) {
+    public void setCareerDescription(final String careerDescription) {
         this.careerDescription = careerDescription;
     }
 
@@ -45,7 +45,7 @@ public class Actor {
         return filmography;
     }
 
-    public void setFilmography(ArrayList<String> filmography) {
+    public void setFilmography(final ArrayList<String> filmography) {
         this.filmography = filmography;
     }
 
@@ -53,7 +53,7 @@ public class Actor {
         return awards;
     }
 
-    public void setAwards(Map<ActorsAwards, Integer> awards) {
+    public void setAwards(final Map<ActorsAwards, Integer> awards) {
         this.awards = awards;
     }
 
@@ -75,7 +75,13 @@ public class Actor {
 //        }
 //    }
 
-    public Double getTotalRating(MovieDatabase md, SerialDatabase sd) {
+
+    /**
+     * @param md
+     * @param sd
+     * @return
+     */
+    public Double getTotalRating(final MovieDatabase md, final SerialDatabase sd) {
         Double ratingSum = 0d;
         int number = 0;
         for (String title : this.filmography) {
@@ -95,10 +101,10 @@ public class Actor {
                 }
             }
         }
-        if (ratingSum ==0 || number == 0) {
+        if (ratingSum == 0 || number == 0) {
             return 0d;
         } else {
-            return (Double)(ratingSum / number);
+            return (Double) (ratingSum / number);
         }
     }
 
@@ -106,7 +112,11 @@ public class Actor {
         return videoRatings;
     }
 
-    public int getMentionedAwards(List<String> mentionedAwards) {
+    /**
+     * @param mentionedAwards
+     * @return
+     */
+    public int getMentionedAwards(final List<String> mentionedAwards) {
         int total = 0, number = mentionedAwards.size();
         for (String award : mentionedAwards) {
             ActorsAwards a = ActorsAwards.valueOf(award);
@@ -119,7 +129,11 @@ public class Actor {
         return total;
     }
 
-    public boolean hasWords (List<String> words) {
+    /**
+     * @param words
+     * @return
+     */
+    public boolean hasWords(final List<String> words) {
         for (String w : words) {
             if (!this.getCareerDescription().toLowerCase().contains(w)) {
                 return false;

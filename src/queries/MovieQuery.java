@@ -10,11 +10,11 @@ import java.util.*;
 
 import static utils.Utils.*;
 
-public class MovieQuery extends Query {
+public final class MovieQuery extends Query {
     private List<List<String>> filters;
-    public MovieQuery(int actionId, String actionType, String objectType,
-                      int number, String username, String sortType,
-                      String criteria, String genre, List<List<String>> filters) {
+    public MovieQuery(final int actionId, final String actionType, final String objectType,
+                      final int number, final String username, final String sortType,
+                      final String criteria, final String genre, final List<List<String>> filters) {
         super(actionId, actionType, objectType, number, username, sortType, criteria);
         this.filters = filters;
     }
@@ -23,15 +23,15 @@ public class MovieQuery extends Query {
         return filters;
     }
 
-    public void setFilters(List<List<String>> filters) {
+    public void setFilters(final List<List<String>> filters) {
         this.filters = filters;
     }
 
 
 
     @Override
-    public String queryMethod(ActorDatabase ad, UserDatabase ud,
-                              MovieDatabase md, SerialDatabase sd) {
+    public String queryMethod(final ActorDatabase ad, final UserDatabase ud,
+                              final MovieDatabase md, final SerialDatabase sd) {
         String message = "Query result: ";
         if (this.getCriteria().equals("ratings")) {
             Map<String, Double> moviesWithRatings = new HashMap<>();
@@ -52,7 +52,8 @@ public class MovieQuery extends Query {
                     moviesWithRatings.put(m.getName(), m.getRating());
                 }
             }
-            List<String> names = formNameList(this.getSortType(), moviesWithRatings, this.getNumber());
+            List<String> names = formNameList(this.getSortType(),
+                    moviesWithRatings, this.getNumber());
             message = message + names;
         } else if (this.getCriteria().equals("favorite")) {
 

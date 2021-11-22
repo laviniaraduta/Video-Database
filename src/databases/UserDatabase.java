@@ -7,17 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UserDatabase {
+public final class UserDatabase {
     private ArrayList<User> users = new ArrayList<User>();
 
-    public void addUsers(List<UserInputData> users) {
-        for (UserInputData u : users) {
+    /**
+     * @param usersList
+     */
+    public void addUsers(final List<UserInputData> usersList) {
+        for (UserInputData u : usersList) {
             String username = u.getUsername();
             String subscription = u.getSubscriptionType();
             Map<String, Integer> history = u.getHistory();
             ArrayList<String> favoriteMovies = u.getFavoriteMovies();
-            User user = new User(username, subscription, history, favoriteMovies);
-            this.users.add(user);
+            this.users.add(new User(username, subscription, history, favoriteMovies));
         }
     }
 
@@ -25,13 +27,17 @@ public class UserDatabase {
         return users;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public void setUsers(final ArrayList<User> users) {
         this.users = users;
     }
 
-    public User getUserByUsername(String username) {
+    /**
+     * @param username
+     * @return
+     */
+    public User getUserByUsername(final String username) {
         for (User u : this.users) {
-            if(u.getUsername().equals(username)) {
+            if (u.getUsername().equals(username)) {
                 return u;
             }
         }

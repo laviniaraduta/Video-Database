@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ActorDatabase {
+public final class ActorDatabase {
     private ArrayList<Actor> actors = new ArrayList<Actor>();
-    public void addActors(List<ActorInputData> actors) {
-        for (ActorInputData a : actors) {
+
+    /**
+     * @param actorsList
+     */
+    public void addActors(final List<ActorInputData> actorsList) {
+        for (ActorInputData a : actorsList) {
             String name = a.getName();
             String career = a.getCareerDescription();
             ArrayList<String> filmography = a.getFilmography();
@@ -24,7 +28,7 @@ public class ActorDatabase {
         return actors;
     }
 
-    public void setActors(ArrayList<Actor> actors) {
+    public void setActors(final ArrayList<Actor> actors) {
         this.actors = actors;
     }
 }

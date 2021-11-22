@@ -121,11 +121,21 @@ public final class Utils {
 
         return mapVideos;
     }
-    public static List<Map.Entry<String, Double>> sortByComparator (Map<String, Double> unsorted, boolean order) {
-        List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
+
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<String, Double>> sortByComparator(
+            final Map<String, Double> unsorted,
+            final boolean order) {
+        List<Map.Entry<String, Double>> list =
+                new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
             @Override
-            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+            public int compare(final Map.Entry<String, Double> o1,
+                               final Map.Entry<String, Double> o2) {
                 if (order) {
                     if (Double.compare(o1.getValue(), o2.getValue()) == 0) {
                         return o1.getKey().compareTo(o2.getKey());
@@ -144,11 +154,20 @@ public final class Utils {
         return list;
     }
 
-    public static List<Map.Entry<String, Integer>> sortByComparatorInteger (Map<String, Integer> unsorted, boolean order) {
-        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(unsorted.entrySet());
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<String, Integer>> sortByComparatorInteger(
+            final Map<String, Integer> unsorted,
+            final boolean order) {
+        List<Map.Entry<String, Integer>> list =
+                new ArrayList<Map.Entry<String, Integer>>(unsorted.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+            public int compare(final Map.Entry<String, Integer> o1,
+                               final Map.Entry<String, Integer> o2) {
                 if (order) {
                     if (Integer.compare(o1.getValue(), o2.getValue()) == 0) {
                         return o1.getKey().compareTo(o2.getKey());
@@ -167,23 +186,16 @@ public final class Utils {
         return list;
     }
 
-    public static List<String> getNames(List<Map.Entry<String, Double>> map, int number) {
+    /**
+     * @param list
+     * @param number
+     * @return
+     */
+    public static List<String> getNames(final List<Map.Entry<String, Double>> list,
+                                        final int number) {
         List<String> names = new ArrayList<String>();
         int index = 0;
-        for (Map.Entry<String, Double> entry : map) {
-            if (index < number) {
-                names.add(entry.getKey());
-                index++;
-            } else {
-                break;
-            }
-        }
-        return names;
-    }
-    public static  List<String> getNamesInteger(List<Map.Entry<String, Integer>> map, int number) {
-        List<String> names = new ArrayList<String>();
-        int index = 0;
-        for (Map.Entry<String, Integer> entry : map) {
+        for (Map.Entry<String, Double> entry : list) {
             if (index < number) {
                 names.add(entry.getKey());
                 index++;
@@ -194,8 +206,36 @@ public final class Utils {
         return names;
     }
 
-    public static List<String> formNameList (String type, Map<String, Double> map, int number) {
-        List<String> names = null;// asc = true, desc = false
+    /**
+     * @param list
+     * @param number
+     * @return
+     */
+    public static List<String> getNamesInteger(final List<Map.Entry<String, Integer>> list,
+                                               final int number) {
+        List<String> names = new ArrayList<String>();
+        int index = 0;
+        for (Map.Entry<String, Integer> entry : list) {
+            if (index < number) {
+                names.add(entry.getKey());
+                index++;
+            } else {
+                break;
+            }
+        }
+        return names;
+    }
+
+    /**
+     * @param type
+     * @param map
+     * @param number
+     * @return
+     */
+    public static List<String> formNameList(final String type,
+                                            final Map<String, Double> map,
+                                            final int number) {
+        List<String> names = null; // asc = true, desc = false
         if (type.equals("asc")) {
             List<Map.Entry<String, Double>> sortedMap = sortByComparator(map, true);
             names = getNames(sortedMap, number);
@@ -206,7 +246,15 @@ public final class Utils {
         return names;
     }
 
-    public static List<String> formNameListInteger (String type, Map<String, Integer> map, int number) {
+    /**
+     * @param type
+     * @param map
+     * @param number
+     * @return
+     */
+    public static List<String> formNameListInteger(final String type,
+                                                   final Map<String, Integer> map,
+                                                   final int number) {
         List<String> names = null;
         if (type.equals("asc")) {
             List<Map.Entry<String, Integer>> sortedMap = sortByComparatorInteger(map, true);

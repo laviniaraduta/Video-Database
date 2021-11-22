@@ -7,11 +7,11 @@ import entertainment.Movie;
 import entertainment.Serial;
 import user.User;
 
-public class Rating extends Command {
+public final class Rating extends Command {
     private Double rating;
     private int season;
-    public Rating(int actionId, String actionType, String type,
-                  String user, String title, Double rating, int season) {
+    public Rating(final int actionId, final String actionType, final String type, final String user,
+                  final String title, final Double rating, final int season) {
         super(actionId, actionType, type, user, title);
         this.rating = rating;
         this.season = season;
@@ -21,7 +21,7 @@ public class Rating extends Command {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(final Double rating) {
         this.rating = rating;
     }
 
@@ -29,11 +29,11 @@ public class Rating extends Command {
         return season;
     }
 
-    public void setSeason(int season) {
+    public void setSeason(final int season) {
         this.season = season;
     }
     // true daca title e film fals daca e serial
-    private Boolean isMovie(String title, MovieDatabase md, SerialDatabase sd) {
+    private Boolean isMovie(final String title, final MovieDatabase md, final SerialDatabase sd) {
         for (Movie m : md.getMovies()) {
             if (m.getName().equals(title)) {
                 return true;
@@ -48,21 +48,22 @@ public class Rating extends Command {
     }
 
     @Override
-    public String commandMethod(UserDatabase ud, MovieDatabase md, SerialDatabase sd) {
+    public String commandMethod(final UserDatabase ud, final MovieDatabase md,
+                                final SerialDatabase sd) {
         String message = null;
         User user = ud.getUserByUsername(this.getUser());
         Boolean typeMovie = isMovie(this.getTitle(), md, sd);
-        if (user.getHistory().containsKey(this.getTitle()) == true) {
-            if(typeMovie == false) {
-                if (user.getSerialsRated().containsKey(this.getTitle()) &&
-                        user.getSerialsRated().get(this.getTitle()).containsKey(this.season)) {
+        if (user.getHistory().containsKey(this.getTitle())) {
+            if (!typeMovie) {
+                if (user.getSerialsRated().containsKey(this.getTitle())
+                        && user.getSerialsRated().get(this.getTitle()).containsKey(this.season)) {
                         message = "error -> " + this.getTitle() + " has been already rated";
                 } else {
                     Serial serial = sd.getSerialByTitle(this.getTitle());
                     serial.getSeasons().get(this.season - 1).getRatings().add(this.rating);
                     serial.setRating();
-                    message = "success -> " + getTitle() +
-                            " was rated with " + this.rating + " by " + this.getUser();
+                    message = "success -> " + getTitle() + " was rated with "
+                            + this.rating + " by " + this.getUser();
                 }
             } else {
                 if (user.getMoviesRated().containsKey(this.getTitle())) {
@@ -72,15 +73,13 @@ public class Rating extends Command {
                     user.getMoviesRated().put(this.getTitle(), this.rating);
                     movie.addRating(this.rating);
                     movie.setRating();
-                    message = "success -> " + getTitle() +
-                            " was rated with " + this.rating + " by " + this.getUser();
+                    message = "success -> " + getTitle() + " was rated with "
+                            + this.rating + " by " + this.getUser();
                 }
             }
-
         } else {
             message = "error -> " + this.getTitle() + " is not seen";
         }
-//        System.out.println(message);
         return message;
     }
 }
