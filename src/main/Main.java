@@ -77,10 +77,12 @@ public final class Main {
         MovieDatabase movieDb = new MovieDatabase();
         SerialDatabase serialDb = new SerialDatabase();
         ActionsDatabase actionDb = new ActionsDatabase();
+
         actorDb.addActors(input.getActors());
         userDb.addUsers(input.getUsers());
         movieDb.addMovies(input.getMovies());
         serialDb.addSerials(input.getSerials());
+//        VideoDatabase videoDb = new VideoDatabase(movieDb, serialDb);
         actionDb.addActions(input.getCommands(), actorDb, movieDb,
                 serialDb, userDb, fileWriter, arrayResult);
 

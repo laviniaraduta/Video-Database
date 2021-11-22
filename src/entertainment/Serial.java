@@ -10,6 +10,7 @@ public class Serial extends Video {
     private ArrayList<String> cast;
     private ArrayList<Season> seasons;
     private Map<Integer, Double> ratingPerSeason = new HashMap<>();
+    private int totalDuration;
 
     public Serial(String name, int year, ArrayList<String> cast, ArrayList<String> genres, int numberOfSeasons, ArrayList<Season> seasons) {
         super(name, year, cast, genres);
@@ -64,5 +65,15 @@ public class Serial extends Video {
 
     public Map<Integer, Double> getRatingPerSeason() {
         return ratingPerSeason;
+    }
+    public void setTotalDuration() {
+        int duration = 0;
+        for (Season s : this.seasons) {
+            duration += s.getDuration();
+        }
+        this.totalDuration = duration;
+    }
+    public int getTotalDuration() {
+        return this.totalDuration;
     }
 }

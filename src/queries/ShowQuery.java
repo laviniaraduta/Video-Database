@@ -5,12 +5,13 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 import entertainment.Movie;
+import entertainment.Serial;
 
 import java.util.*;
 
-public class MovieQuery extends Query {
+public class ShowQuery extends Query {
     private List<List<String>> filters;
-    public MovieQuery(int actionId, String actionType, String objectType,
+    public ShowQuery(int actionId, String actionType, String objectType,
                       int number, String username, String sortType,
                       String criteria, String genre, List<List<String>> filters) {
         super(actionId, actionType, objectType, number, username, sortType, criteria);
@@ -24,7 +25,6 @@ public class MovieQuery extends Query {
     public void setFilters(List<List<String>> filters) {
         this.filters = filters;
     }
-
     private static List<Map.Entry<String, Double>> sortByComparator (Map<String, Double> unsorted, boolean order) {
         List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
@@ -66,35 +66,33 @@ public class MovieQuery extends Query {
                               MovieDatabase md, SerialDatabase sd) {
         String message = "Query result: ";
         if (this.getCriteria().equals("ratings")) {
-            Map<String, Double> moviesWithRatings = new HashMap<>();
+            Map<String, Double> showsWithRatings = new HashMap<>();
             Integer year;
             boolean condition;
             List<String> genres = this.filters.get(1);
-            for (Movie m : md.getMovies()) {
-                m.setRating();
-                condition = m.getRating() != 0;
+            for (Serial s : sd.getSerials()) {
+                s.setRating();
+                condition = s.getRating() != 0;
                 if (this.filters.get(0).get(0) != null) {
                     year = Integer.valueOf(this.filters.get(0).get(0));
-                    condition = condition && (m.getYear() == year);
+                    condition = condition && (s.getYear() == year);
                 }
                 if (this.filters.get(1).get(0) != null) {
-                    condition = condition && m.getGenres().containsAll(this.filters.get(1));
+                    condition = condition && s.getGenres().containsAll(this.filters.get(1));
                 }
                 if (condition) {
-                    moviesWithRatings.put(m.getName(), m.getRating());
+                    showsWithRatings.put(s.getName(), s.getRating());
                 }
             }
             List<String> names = new ArrayList<>();// asc = true, desc = false
             if (this.getSortType().equals("asc")) {
-                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(moviesWithRatings, true);
+                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(showsWithRatings, true);
                 names = getNames(sortedRatings);
             } else if (this.getSortType().equals("desc")) {
-                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(moviesWithRatings, false);
+                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(showsWithRatings, false);
                 names = getNames(sortedRatings);
             }
             message = message + names;
-//            System.out.println(message);
-
         } else if (this.getCriteria().equals("favorite")) {
 
         } else if (this.getCriteria().equals("longest")) {

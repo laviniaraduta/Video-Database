@@ -6,7 +6,7 @@ public class Movie extends Video {
     private int duration;
     private Double rating;
     private ArrayList<Double> ratings = new ArrayList<Double>();
-    public Movie(String name, int year, int duration, ArrayList<String> genres, ArrayList<String> cast) {
+    public Movie(String name, Integer year, int duration, ArrayList<String> genres, ArrayList<String> cast) {
         super(name, year, cast, genres);
         this.duration = duration;
     }
@@ -28,7 +28,11 @@ public class Movie extends Video {
         for (Double i : this.ratings) {
             sum = sum + i;
         }
-        this.rating = (Double)(sum / this.ratings.size());
+        if (this.ratings.size() == 0) {
+            this.rating = 0d;
+        } else {
+            this.rating = (Double) (sum / this.ratings.size());
+        }
     }
     public void addRating(Double rating) {
         this.ratings.add(rating);

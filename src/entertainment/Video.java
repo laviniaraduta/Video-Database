@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Video {
     private String name;
-    private int year;
+    private Integer year;
     private ArrayList<String> cast;
     private ArrayList<String> genres;
 
@@ -23,7 +23,7 @@ public abstract class Video {
         this.name = name;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 

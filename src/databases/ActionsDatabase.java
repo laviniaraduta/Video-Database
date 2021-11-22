@@ -7,10 +7,7 @@ import commands.View;
 import fileio.ActionInputData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import queries.ActorQuery;
-import queries.MovieQuery;
-import queries.Query;
-import queries.UserQuery;
+import queries.*;
 import recommendations.*;
 
 import java.io.IOException;
@@ -72,9 +69,20 @@ public class ActionsDatabase {
                     array.add(object);
 //                    this.queries.add(aq);
                 } else if(objectType.equals("movies")) {
-                    this.queries.add(new MovieQuery(id, actionType, objectType, number, user,
-                            sortType, criteria, genre, filters));
-                } else if(objectType.equals("users")) {
+                    MovieQuery mq = new MovieQuery(id, actionType, objectType, number,
+                            user, sortType, criteria, genre, filters);
+                    String message = mq.queryMethod(ad, ud, md, sd);
+                    JSONObject object = writer.writeFile(mq.getActionId(), message);
+                    array.add(object);
+//                    this.queries.add(new MovieQuery(id, actionType, objectType, number, user,
+//                            sortType, criteria, genre, filters));
+                }else if (objectType.equals("shows")) {
+                    ShowQuery sq = new ShowQuery(id, actionType, objectType, number,
+                            user, sortType, criteria, genre, filters);
+                    String message = sq.queryMethod(ad, ud, md, sd);
+                    JSONObject object = writer.writeFile(sq.getActionId(), message);
+                    array.add(object);
+                }else if(objectType.equals("users")) {
                     this.queries.add(new UserQuery(id, actionType, objectType, number,
                             user, sortType, criteria));
                 }
