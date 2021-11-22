@@ -8,6 +8,8 @@ import entertainment.Movie;
 
 import java.util.*;
 
+import static utils.Utils.*;
+
 public class MovieQuery extends Query {
     private List<List<String>> filters;
     public MovieQuery(int actionId, String actionType, String objectType,
@@ -25,42 +27,8 @@ public class MovieQuery extends Query {
         this.filters = filters;
     }
 
-    private static List<Map.Entry<String, Double>> sortByComparator (Map<String, Double> unsorted, boolean order) {
-        List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
-            @Override
-            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
-                if (order) {
-                    if (Double.compare(o1.getValue(), o2.getValue()) == 0) {
-                        return o1.getKey().compareTo(o2.getKey());
-                    } else {
-                        return Double.compare(o1.getValue(), o2.getValue());
-                    }
-                } else {
-                    if (Double.compare(o2.getValue(), o1.getValue()) == 0) {
-                        return o2.getKey().compareTo(o1.getKey());
-                    } else {
-                        return Double.compare(o2.getValue(), o1.getValue());
-                    }
-                }
-            }
-        });
-        return list;
-    }
 
-    private List<String> getNames(List<Map.Entry<String, Double>> map) {
-        List<String> names = new ArrayList<String>();
-        int index = 0;
-        for (Map.Entry<String, Double> entry : map) {
-            if (index < this.getNumber()) {
-                names.add(entry.getKey());
-                index++;
-            } else {
-                break;
-            }
-        }
-        return names;
-    }
+
     @Override
     public String queryMethod(ActorDatabase ad, UserDatabase ud,
                               MovieDatabase md, SerialDatabase sd) {
@@ -84,17 +52,8 @@ public class MovieQuery extends Query {
                     moviesWithRatings.put(m.getName(), m.getRating());
                 }
             }
-            List<String> names = new ArrayList<>();// asc = true, desc = false
-            if (this.getSortType().equals("asc")) {
-                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(moviesWithRatings, true);
-                names = getNames(sortedRatings);
-            } else if (this.getSortType().equals("desc")) {
-                List<Map.Entry<String, Double>> sortedRatings = sortByComparator(moviesWithRatings, false);
-                names = getNames(sortedRatings);
-            }
+            List<String> names = formNameList(this.getSortType(), moviesWithRatings, this.getNumber());
             message = message + names;
-//            System.out.println(message);
-
         } else if (this.getCriteria().equals("favorite")) {
 
         } else if (this.getCriteria().equals("longest")) {

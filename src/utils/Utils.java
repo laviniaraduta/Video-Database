@@ -6,9 +6,7 @@ import entertainment.Genre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * The class contains static methods that helps with parsing.
@@ -123,4 +121,101 @@ public final class Utils {
 
         return mapVideos;
     }
+    public static List<Map.Entry<String, Double>> sortByComparator (Map<String, Double> unsorted, boolean order) {
+        List<Map.Entry<String, Double>> list = new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+            @Override
+            public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
+                if (order) {
+                    if (Double.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Double.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Double.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Double.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+    public static List<Map.Entry<String, Integer>> sortByComparatorInteger (Map<String, Integer> unsorted, boolean order) {
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                if (order) {
+                    if (Integer.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Integer.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Integer.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Integer.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+    public static List<String> getNames(List<Map.Entry<String, Double>> map, int number) {
+        List<String> names = new ArrayList<String>();
+        int index = 0;
+        for (Map.Entry<String, Double> entry : map) {
+            if (index < number) {
+                names.add(entry.getKey());
+                index++;
+            } else {
+                break;
+            }
+        }
+        return names;
+    }
+    public static  List<String> getNamesInteger(List<Map.Entry<String, Integer>> map, int number) {
+        List<String> names = new ArrayList<String>();
+        int index = 0;
+        for (Map.Entry<String, Integer> entry : map) {
+            if (index < number) {
+                names.add(entry.getKey());
+                index++;
+            } else {
+                break;
+            }
+        }
+        return names;
+    }
+
+    public static List<String> formNameList (String type, Map<String, Double> map, int number) {
+        List<String> names = null;// asc = true, desc = false
+        if (type.equals("asc")) {
+            List<Map.Entry<String, Double>> sortedMap = sortByComparator(map, true);
+            names = getNames(sortedMap, number);
+        } else if (type.equals("desc")) {
+            List<Map.Entry<String, Double>> sortedMap = sortByComparator(map, false);
+            names = getNames(sortedMap, number);
+        }
+        return names;
+    }
+
+    public static List<String> formNameListInteger (String type, Map<String, Integer> map, int number) {
+        List<String> names = null;
+        if (type.equals("asc")) {
+            List<Map.Entry<String, Integer>> sortedMap = sortByComparatorInteger(map, true);
+            names = getNamesInteger(sortedMap, number);
+        } else if (type.equals("desc")) {
+            List<Map.Entry<String, Integer>> sortedMap = sortByComparatorInteger(map, false);
+            names = getNamesInteger(sortedMap, number);
+        }
+        return names;
+    }
+
 }
