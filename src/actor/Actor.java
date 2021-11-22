@@ -118,4 +118,13 @@ public class Actor {
         }
         return total;
     }
+
+    public boolean hasWords (List<String> words) {
+        for (String w : words) {
+            if (!this.getCareerDescription().toLowerCase().contains(w)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

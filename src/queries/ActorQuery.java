@@ -105,25 +105,25 @@ public class ActorQuery extends Query {
         return names;
     }
 
-    private Map.Entry<String, Double> minEntry (Map<String, Double> map) {
-        Map.Entry<String, Double> min = null;
-        for (Map.Entry<String, Double> entry : map.entrySet()) {
-            if (min == null || Double.compare(min.getValue(), entry.getValue()) > 0) {
-                min = entry;
-            }
-        }
-        return min;
-    }
-
-    private Map.Entry<String, Double> maxEntry (Map<String, Double> map) {
-        Map.Entry<String, Double> max = null;
-        for (Map.Entry<String, Double> entry : map.entrySet()) {
-            if (max == null || Double.compare(max.getValue(), entry.getValue()) < 0) {
-                max = entry;
-            }
-        }
-        return max;
-    }
+//    private Map.Entry<String, Double> minEntry (Map<String, Double> map) {
+//        Map.Entry<String, Double> min = null;
+//        for (Map.Entry<String, Double> entry : map.entrySet()) {
+//            if (min == null || Double.compare(min.getValue(), entry.getValue()) > 0) {
+//                min = entry;
+//            }
+//        }
+//        return min;
+//    }
+//
+//    private Map.Entry<String, Double> maxEntry (Map<String, Double> map) {
+//        Map.Entry<String, Double> max = null;
+//        for (Map.Entry<String, Double> entry : map.entrySet()) {
+//            if (max == null || Double.compare(max.getValue(), entry.getValue()) < 0) {
+//                max = entry;
+//            }
+//        }
+//        return max;
+//    }
     @Override
     public String queryMethod(ActorDatabase ad, UserDatabase ud,
                               MovieDatabase md, SerialDatabase sd) {
@@ -166,6 +166,19 @@ public class ActorQuery extends Query {
             message = message + names;
 
         } else if (this.getCriteria().equals("filter_description")) {
+            List<String> words = this.filters.get(2);
+            List<String> actors = new ArrayList<String>();
+            for (Actor a : ad.getActors()) {
+                if (a.hasWords(words)) {
+                    actors.add(a.getName());
+                }
+            }
+            if (this.getSortType().equals("asc")) {
+                actors.sort(Comparator.naturalOrder());
+            } else if (this.getSortType().equals("desc")) {
+                actors.sort(Comparator.reverseOrder());
+            }
+            message = message + actors;
 
         }
 //        System.out.println(message);
