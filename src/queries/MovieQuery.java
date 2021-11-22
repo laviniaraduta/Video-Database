@@ -36,14 +36,14 @@ public final class MovieQuery extends Query {
         if (this.getCriteria().equals("ratings")) {
             Map<String, Double> moviesWithRatings = new HashMap<>();
             Integer year;
-            boolean condition;
             List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
+                boolean condition;
                 m.setRating();
                 condition = m.getRating() != 0;
                 if (this.filters.get(0).get(0) != null) {
                     year = Integer.valueOf(this.filters.get(0).get(0));
-                    condition = condition && (m.getYear() == year);
+                    condition = condition && (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
                     condition = condition && m.getGenres().containsAll(this.filters.get(1));
@@ -56,9 +56,49 @@ public final class MovieQuery extends Query {
                     moviesWithRatings, this.getNumber());
             message = message + names;
         } else if (this.getCriteria().equals("favorite")) {
-
+            Map<String, Integer> moviesWithLikes = new HashMap<>();
+            Integer year;
+            List<String> genres = this.filters.get(1);
+            for (Movie m : md.getMovies()) {
+                boolean condition = true;
+                m.setLikes(ud);
+                if (m.getLikes() == 0) {
+                    condition = false;
+                }
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = condition && (m.getYear().equals(year));
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && m.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    moviesWithLikes.put(m.getName(), m.getLikes());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    moviesWithLikes, this.getNumber());
+            message = message + names;
         } else if (this.getCriteria().equals("longest")) {
-
+            Map<String, Integer> moviesWithDuration = new HashMap<>();
+            Integer year;
+            List<String> genres = this.filters.get(1);
+            for (Movie m : md.getMovies()) {
+                boolean condition = true;
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = (m.getYear() == year);
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && m.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    moviesWithDuration.put(m.getName(), m.getDuration());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    moviesWithDuration, this.getNumber());
+            message = message + names;
         } else if (this.getCriteria().equals("most_viewed")) {
 
         }

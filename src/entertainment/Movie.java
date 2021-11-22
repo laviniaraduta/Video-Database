@@ -1,5 +1,8 @@
 package entertainment;
 
+import databases.UserDatabase;
+import user.User;
+
 import java.util.ArrayList;
 
 public final class Movie extends Video {
@@ -45,6 +48,8 @@ public final class Movie extends Video {
     public void setRatings(final ArrayList<Double> ratings) {
         this.ratings = ratings;
     }
+
+
 
     /**
      * @param newRating

@@ -4,6 +4,7 @@ import databases.ActorDatabase;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
+import entertainment.Movie;
 import entertainment.Serial;
 
 import java.util.*;
@@ -34,9 +35,9 @@ public final class ShowQuery extends Query {
         if (this.getCriteria().equals("ratings")) {
             Map<String, Double> showsWithRatings = new HashMap<>();
             Integer year;
-            boolean condition;
             List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
+                boolean condition;
                 s.setRating();
                 condition = s.getRating() != 0;
                 if (this.filters.get(0).get(0) != null) {
@@ -54,8 +55,52 @@ public final class ShowQuery extends Query {
                     showsWithRatings, this.getNumber());
             message = message + names;
         } else if (this.getCriteria().equals("favorite")) {
+            Map<String, Integer> showsWithLikes = new HashMap<>();
+            Integer year;
 
+            List<String> genres = this.filters.get(1);
+            for (Serial s : sd.getSerials()) {
+                boolean condition = true;
+                s.setLikes(ud);
+                if (s.getLikes() == 0) {
+                    condition = false;
+                }
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = condition && (s.getYear().equals(year));
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && s.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    showsWithLikes.put(s.getName(), s.getLikes());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    showsWithLikes, this.getNumber());
+            message = message + names;
+//            System.out.println(message);
         } else if (this.getCriteria().equals("longest")) {
+            Map<String, Integer> showsWithDuration = new HashMap<>();
+            Integer year;
+            List<String> genres = this.filters.get(1);
+            for (Serial s : sd.getSerials()) {
+                boolean condition = true;
+                s.setTotalDuration();
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = (s.getYear().equals(year));
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && s.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    showsWithDuration.put(s.getName(), s.getTotalDuration());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    showsWithDuration, this.getNumber());
+            message = message + names;
 
         } else if (this.getCriteria().equals("most_viewed")) {
 

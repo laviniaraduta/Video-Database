@@ -1,5 +1,8 @@
 package entertainment;
 
+import databases.UserDatabase;
+import user.User;
+
 import java.util.ArrayList;
 
 public class Video {
@@ -7,7 +10,7 @@ public class Video {
     private Integer year;
     private ArrayList<String> cast;
     private ArrayList<String> genres;
-
+    private int likes;
     public Video(final String name, final int year,
                  final ArrayList<String> cast, final ArrayList<String> genres) {
         this.name = name;
@@ -46,5 +49,19 @@ public class Video {
 
     public final void setGenres(final ArrayList<String> genres) {
         this.genres = genres;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(final UserDatabase ud) {
+        int likes = 0;
+        for (User u : ud.getUsers()) {
+            if (u.getFavourite().contains(this.getName())) {
+                likes++;
+            }
+        }
+        this.likes = likes;
     }
 }
