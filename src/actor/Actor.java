@@ -8,6 +8,7 @@ import entertainment.Video;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Actor {
@@ -103,5 +104,18 @@ public class Actor {
 
     public Map<String, Double> getVideoRatings() {
         return videoRatings;
+    }
+
+    public int getMentionedAwards(List<String> mentionedAwards) {
+        int total = 0, number = mentionedAwards.size();
+        for (String award : mentionedAwards) {
+            ActorsAwards a = ActorsAwards.valueOf(award);
+            if (this.getAwards().containsKey(a)) {
+                total += this.getAwards().get(a);
+            } else {
+                return 0;
+            }
+        }
+        return total;
     }
 }
