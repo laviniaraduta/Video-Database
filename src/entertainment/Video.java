@@ -10,7 +10,8 @@ public class Video {
     private Integer year;
     private ArrayList<String> cast;
     private ArrayList<String> genres;
-    private int likes;
+    private Integer likes;
+    private Integer views;
     public Video(final String name, final int year,
                  final ArrayList<String> cast, final ArrayList<String> genres) {
         this.name = name;
@@ -51,8 +52,8 @@ public class Video {
         this.genres = genres;
     }
 
-    public int getLikes() {
-        return likes;
+    public Integer getLikes() {
+        return this.likes;
     }
 
     public void setLikes(final UserDatabase ud) {
@@ -63,5 +64,19 @@ public class Video {
             }
         }
         this.likes = likes;
+    }
+
+    public Integer getViews() {
+        return this.views;
+    }
+
+    public void setViews(final UserDatabase ud) {
+        int views = 0;
+        for (User u : ud.getUsers()) {
+            if (u.getHistory().containsKey(this.getName())) {
+                views += u.getHistory().get(this.getName());
+            }
+        }
+        this.views = views;
     }
 }

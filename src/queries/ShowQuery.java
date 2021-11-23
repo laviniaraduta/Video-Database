@@ -103,7 +103,29 @@ public final class ShowQuery extends Query {
             message = message + names;
 
         } else if (this.getCriteria().equals("most_viewed")) {
-
+            Map<String, Integer> showsWithViews = new HashMap<>();
+            Integer year;
+            List<String> genres = this.filters.get(1);
+            for (Serial s : sd.getSerials()) {
+                boolean condition = true;
+                s.setViews(ud);
+                if (s.getViews().equals(0)) {
+                    condition = false;
+                }
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = condition && (s.getYear().equals(year));
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && s.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    showsWithViews.put(s.getName(), s.getViews());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    showsWithViews, this.getNumber());
+            message = message + names;
         }
         return message;
     }

@@ -87,7 +87,7 @@ public final class MovieQuery extends Query {
                 boolean condition = true;
                 if (this.filters.get(0).get(0) != null) {
                     year = Integer.valueOf(this.filters.get(0).get(0));
-                    condition = (m.getYear() == year);
+                    condition = (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
                     condition = condition && m.getGenres().containsAll(this.filters.get(1));
@@ -100,7 +100,29 @@ public final class MovieQuery extends Query {
                     moviesWithDuration, this.getNumber());
             message = message + names;
         } else if (this.getCriteria().equals("most_viewed")) {
-
+            Map<String, Integer> moviesWithViews = new HashMap<>();
+            Integer year;
+            List<String> genres = this.filters.get(1);
+            for (Movie m : md.getMovies()) {
+                boolean condition = true;
+                m.setViews(ud);
+                if (m.getViews().equals(0)) {
+                    condition = false;
+                }
+                if (this.filters.get(0).get(0) != null) {
+                    year = Integer.valueOf(this.filters.get(0).get(0));
+                    condition = condition && (m.getYear().equals(year));
+                }
+                if (this.filters.get(1).get(0) != null) {
+                    condition = condition && m.getGenres().containsAll(this.filters.get(1));
+                }
+                if (condition) {
+                    moviesWithViews.put(m.getName(), m.getViews());
+                }
+            }
+            List<String> names = formNameListInteger(this.getSortType(),
+                    moviesWithViews, this.getNumber());
+            message = message + names;
         }
         return message;
     }
