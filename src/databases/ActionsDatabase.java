@@ -87,6 +87,11 @@ public final  class ActionsDatabase {
                 } else if (objectType.equals("users")) {
 //                    this.queries.add(new UserQuery(id, actionType, objectType, number,
 //                            user, sortType, criteria));
+                    UserQuery uq = new UserQuery(id, actionType, objectType, number,
+                            user, sortType, criteria);
+                    String message = uq.queryMethod(ad, ud, md, sd);
+                    JSONObject object = writer.writeFile(uq.getActionId(), message);
+                    array.add(object);
                 }
             } else if (actionType.equals("recommendation")) {
                 String user = a.getUsername();

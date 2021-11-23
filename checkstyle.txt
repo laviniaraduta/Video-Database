@@ -1,11 +1,12 @@
 Starting audit...
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\commands\View.java:6:8: Unused import - entertainment.Movie. [UnusedImports]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\commands\View.java:7:8: Unused import - entertainment.Serial. [UnusedImports]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:9:15: Using the '.*' form of import should be avoided - queries.*. [AvoidStarImport]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:87:56: Must have at least one statement. [EmptyBlock]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:94:46: Must have at least one statement. [EmptyBlock]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:96:56: Must have at least one statement. [EmptyBlock]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:98:52: Must have at least one statement. [EmptyBlock]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:100:53: Must have at least one statement. [EmptyBlock]
-[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:102:51: Must have at least one statement. [EmptyBlock]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:99:46: Must have at least one statement. [EmptyBlock]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:101:56: Must have at least one statement. [EmptyBlock]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:103:52: Must have at least one statement. [EmptyBlock]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:105:53: Must have at least one statement. [EmptyBlock]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\databases\ActionsDatabase.java:107:51: Must have at least one statement. [EmptyBlock]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\entertainment\Movie.java:3:8: Unused import - databases.UserDatabase. [UnusedImports]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\entertainment\Movie.java:4:8: Unused import - user.User. [UnusedImports]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\entertainment\Video.java:55:5: Class 'Video' looks like designed for extension (can be subclassed), but the method 'getLikes' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'Video' final or making the method 'getLikes' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
@@ -26,6 +27,7 @@ Starting audit...
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\queries\ShowQuery.java:7:8: Unused import - entertainment.Movie. [UnusedImports]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\queries\ShowQuery.java:10:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\queries\ShowQuery.java:12:26: Using the '.*' form of import should be avoided - utils.Utils.*. [AvoidStarImport]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\queries\UserQuery.java:13:15: Unused import - utils.Utils.formNameList. [UnusedImports]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\BestUnseenRec.java:3:50: '{' is not preceded with whitespace. [WhitespaceAround]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\BestUnseenRec.java:5:26: Parameter actionId should be final. [FinalParameters]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\BestUnseenRec.java:5:40: Parameter actionType should be final. [FinalParameters]
@@ -67,6 +69,7 @@ Starting audit...
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\StandardRec.java:5:38: Parameter actionType should be final. [FinalParameters]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\StandardRec.java:5:57: Parameter type should be final. [FinalParameters]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\recommendations\StandardRec.java:5:70: Parameter username should be final. [FinalParameters]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\user\User.java:76:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] C:\Users\lavin\Desktop\tema\.\src\utils\Utils.java:9:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 69 errors.
+Checkstyle ends with 72 errors.
