@@ -5,10 +5,9 @@ import databases.SerialDatabase;
 import entertainment.Movie;
 import entertainment.Serial;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Actor {
     private String name;
@@ -135,7 +134,17 @@ public final class Actor {
      */
     public boolean hasWords(final List<String> words) {
         for (String w : words) {
-            if (!this.getCareerDescription().toLowerCase().contains(w)) {
+//            if (!this.getCareerDescription().matches(".* " + w + " .*")){
+//                return false;
+//            }
+//            if (!this.getCareerDescription().toLowerCase().contains(w.toLowerCase())) {
+//                return false;
+//            }
+            String patternString = "[ -]" + w + "[ ,.]";
+            Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(this.careerDescription);
+            boolean found = matcher.find();
+            if (!found) {
                 return false;
             }
         }

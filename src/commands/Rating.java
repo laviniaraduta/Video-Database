@@ -7,6 +7,9 @@ import entertainment.Movie;
 import entertainment.Serial;
 import user.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Rating extends Command {
     private Double rating;
     private int season;
@@ -62,6 +65,11 @@ public final class Rating extends Command {
                     Serial serial = sd.getSerialByTitle(this.getTitle());
                     serial.getSeasons().get(this.season - 1).getRatings().add(this.rating);
                     serial.setRating();
+                    Map<Integer, Double> map = new HashMap<>();
+                    map.put(this.season, this.rating);
+                    user.getSerialsRated().put(this.getTitle(), map);
+                    Integer ratings = user.getNumberOfRatings() + 1;
+                    user.setNumberOfRatings(ratings);
                     message = "success -> " + getTitle() + " was rated with "
                             + this.rating + " by " + this.getUser();
                 }
@@ -73,6 +81,8 @@ public final class Rating extends Command {
                     user.getMoviesRated().put(this.getTitle(), this.rating);
                     movie.addRating(this.rating);
                     movie.setRating();
+                    Integer ratings = user.getNumberOfRatings() + 1;
+                    user.setNumberOfRatings(ratings);
                     message = "success -> " + getTitle() + " was rated with "
                             + this.rating + " by " + this.getUser();
                 }

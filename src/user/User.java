@@ -11,7 +11,7 @@ public final class User {
     private ArrayList<String> favourite;
     private Map<String, Double> moviesRated = new HashMap<>();
     private Map<String, Map<Integer, Double>> serialsRated = new HashMap<>();
-    private Integer numberOfRatings;
+    private Integer numberOfRatings = 0;
 
     public User(final String username, final String subscription,
                 final Map<String, Integer> history, final ArrayList<String> favourite) {
@@ -73,7 +73,7 @@ public final class User {
         return numberOfRatings;
     }
 
-    public void setNumberOfRatings() {
-        this.numberOfRatings = this.moviesRated.size() + this.serialsRated.size();
+    public void setNumberOfRatings(Integer rating) {
+        this.numberOfRatings = rating;
     }
 }
