@@ -54,6 +54,20 @@ public final class Constants {
     public static final String QUERY = "query";
     public static final String COMMAND = "command";
     public static final String RECOMMENDATION = "recommendation";
+    public static final String FAVORITE = "favorite";
+    public static final String VIEW = "view";
+    public static final String RATING = "rating";
+    public static final String STANDARD = "standard";
+    public static final String BEST_UNSEEN = "best_unseen";
+    public static final String POPULAR = "popular";
+    public static final String SEARCH = "search";
+    public static final String RATINGS = "ratings";
+    public static final String LONGEST = "longest";
+    public static final String MOST_VIEWED = "most_viewed";
+    public static final String PREMIUM = "PREMIUM";
+    public static final String AVERAGE = "average";
+    public static final String ASCENDING = "asc";
+    public static final String DESCENDING = "desc";
 
     // checker constants
     public static final String ID_STRING = "id";

@@ -5,6 +5,9 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 
+/**
+ * The parent class for the Query actions
+ */
 public abstract class Query {
     private int actionId;
     private String actionType;

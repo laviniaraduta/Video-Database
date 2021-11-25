@@ -9,6 +9,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The class keeps a list of all the videos (movies + shows)
+ * also keeps 4 lists sorted by different criteria that
+ * are used in recommendation actions
+ */
 public final class VideoDatabase {
     private List<Video> videoList;
     private List<Video> videosByRating = new ArrayList<>();
@@ -17,7 +22,7 @@ public final class VideoDatabase {
     private List<Video> videosByRatingByName = new ArrayList<>();
 
     public VideoDatabase(final MovieDatabase md, final SerialDatabase sd, final UserDatabase ud) {
-        this.videoList = new ArrayList<Video>();
+        this.videoList = new ArrayList<>();
         for (Movie m : md.getMovies()) {
             m.setRating();
             m.setViews(ud);

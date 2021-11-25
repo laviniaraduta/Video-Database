@@ -1,5 +1,6 @@
 package queries;
 
+import common.Constants;
 import databases.ActorDatabase;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
@@ -35,7 +36,7 @@ public final class ShowQuery extends Query {
     public String queryMethod(final ActorDatabase ad, final UserDatabase ud,
                               final MovieDatabase md, final SerialDatabase sd) {
         String message = "Query result: ";
-        if (this.getCriteria().equals("ratings")) {
+        if (this.getCriteria().equals(Constants.RATINGS)) {
             Map<String, Double> showsWithRatings = new HashMap<>();
             Integer year;
             for (Serial s : sd.getSerials()) {
@@ -55,10 +56,9 @@ public final class ShowQuery extends Query {
             List<String> names = formNameList(this.getSortType(),
                     showsWithRatings, this.getNumber());
             message = message + names;
-        } else if (this.getCriteria().equals("favorite")) {
+        } else if (this.getCriteria().equals(Constants.FAVORITE)) {
             Map<String, Integer> showsWithLikes = new HashMap<>();
             Integer year;
-            List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
                 boolean condition = true;
                 s.setLikes(ud);
@@ -79,10 +79,9 @@ public final class ShowQuery extends Query {
             List<String> names = formNameListInteger(this.getSortType(),
                     showsWithLikes, this.getNumber());
             message = message + names;
-        } else if (this.getCriteria().equals("longest")) {
+        } else if (this.getCriteria().equals(Constants.LONGEST)) {
             Map<String, Integer> showsWithDuration = new HashMap<>();
             Integer year;
-            List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
                 boolean condition = true;
                 s.setTotalDuration();
@@ -101,10 +100,9 @@ public final class ShowQuery extends Query {
                     showsWithDuration, this.getNumber());
             message = message + names;
 
-        } else if (this.getCriteria().equals("most_viewed")) {
+        } else if (this.getCriteria().equals(Constants.MOST_VIEWED)) {
             Map<String, Integer> showsWithViews = new HashMap<>();
             Integer year;
-            List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
                 boolean condition = true;
                 s.setViews(ud);

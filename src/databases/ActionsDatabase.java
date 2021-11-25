@@ -1,5 +1,6 @@
 package databases;
 
+import common.Constants;
 import fileio.ActionInputData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,8 +24,10 @@ import recommendations.FavoriteRec;
 import recommendations.PopularRec;
 import recommendations.StandardRec;
 
-import user.User;
-
+/**
+ * Class that creates instances for every action, runs their method
+ * and creates the final text that will be written in the result file
+ */
 public final  class ActionsDatabase {
     /**
      * Decides the type of action and runs the corresponding methods
@@ -41,87 +44,81 @@ public final  class ActionsDatabase {
                            final MovieDatabase md, final SerialDatabase sd, final UserDatabase ud,
                            final Writer writer, final JSONArray array) throws IOException {
         for (ActionInputData a : actions) {
-            int id = a.getActionId();
-            String actionType = a.getActionType();
-            String type = a.getType();
             String message = null;
-            if (actionType.equals("command")) {
-                String user = a.getUsername();
-                String title = a.getTitle();
-                Double grade = a.getGrade();
-                int season = a.getSeasonNumber();
-                if (type.equals("favorite")) {
-                    Favorite f =  new Favorite(id, actionType, type, user, title);
+            if (a.getActionType().equals(Constants.COMMAND)) {
+
+                if (a.getType().equals(Constants.FAVORITE)) {
+                    Favorite f =  new Favorite(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername(), a.getTitle());
                     message = f.commandMethod(ud, md, sd);
-                } else if (type.equals("view")) {
-                    View v = new View(id, actionType, type, user, title);
+
+                } else if (a.getType().equals(Constants.VIEW)) {
+                    View v = new View(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername(), a.getTitle());
                     message = v.commandMethod(ud, md, sd);
-                } else if (type.equals("rating")) {
-                    Rating r = new Rating(id, actionType, type, user, title, grade, season);
+
+                } else if (a.getType().equals(Constants.RATING)) {
+                    Rating r = new Rating(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername(), a.getTitle(),
+                            a.getGrade(), a.getSeasonNumber());
                     message = r.commandMethod(ud, md, sd);
                 }
-            } else if (actionType.equals("query")) {
-                String user = a.getUsername();
-                String objectType = a.getObjectType();
-                int number = a.getNumber();
-                String sortType = a.getSortType();
-                String criteria = a.getCriteria();
-                String genre = a.getGenre();
-                List<List<String>> filters = a.getFilters();
-                if (objectType.equals("actors")) {
-                    ActorQuery aq = new ActorQuery(id, actionType, objectType, number,
-                            user, sortType, criteria, genre, filters);
+            } else if (a.getActionType().equals(Constants.QUERY)) {
+
+                if (a.getObjectType().equals(Constants.ACTORS)) {
+                    ActorQuery aq = new ActorQuery(a.getActionId(), a.getActionType(),
+                            a.getObjectType(), a.getNumber(), a.getUsername(),
+                            a.getSortType(), a.getCriteria(), a.getGenre(), a.getFilters());
                     message = aq.queryMethod(ad, ud, md, sd);
-                } else if (objectType.equals("movies")) {
-                    MovieQuery mq = new MovieQuery(id, actionType, objectType, number,
-                            user, sortType, criteria, genre, filters);
+
+                } else if (a.getObjectType().equals(Constants.MOVIES)) {
+                    MovieQuery mq = new MovieQuery(a.getActionId(), a.getActionType(),
+                            a.getObjectType(), a.getNumber(), a.getUsername(),
+                            a.getSortType(), a.getCriteria(), a.getGenre(), a.getFilters());
                     message = mq.queryMethod(ad, ud, md, sd);
-                } else if (objectType.equals("shows")) {
-                    ShowQuery sq = new ShowQuery(id, actionType, objectType, number,
-                            user, sortType, criteria, genre, filters);
+
+                } else if (a.getObjectType().equals(Constants.SHOWS)) {
+                    ShowQuery sq = new ShowQuery(a.getActionId(), a.getActionType(),
+                            a.getObjectType(), a.getNumber(), a.getUsername(),
+                            a.getSortType(), a.getCriteria(), a.getGenre(), a.getFilters());
                     message = sq.queryMethod(ad, ud, md, sd);
-                } else if (objectType.equals("users")) {
-                    UserQuery uq = new UserQuery(id, actionType, objectType, number,
-                            user, sortType, criteria);
+
+                } else if (a.getObjectType().equals(Constants.USERS)) {
+                    UserQuery uq = new UserQuery(a.getActionId(), a.getActionType(),
+                            a.getObjectType(), a.getNumber(), a.getUsername(),
+                            a.getSortType(), a.getCriteria());
                     message = uq.queryMethod(ad, ud, md, sd);
                 }
-            } else if (actionType.equals("recommendation")) {
-                String user = a.getUsername();
-                String genre = a.getGenre();
+            } else if (a.getActionType().equals(Constants.RECOMMENDATION)) {
+
                 VideoDatabase vd = new VideoDatabase(md, sd, ud);
-                if (type.equals("standard")) {
-                    StandardRec sr = new StandardRec(id, actionType, type, user);
+                if (a.getType().equals(Constants.STANDARD)) {
+                    StandardRec sr = new StandardRec(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername());
                     message = sr.recommendationMethod(ud, vd);
-                } else if (type.equals("best_unseen")) {
-                    BestUnseenRec br = new BestUnseenRec(id, actionType, type, user);
+
+                } else if (a.getType().equals(Constants.BEST_UNSEEN)) {
+                    BestUnseenRec br = new BestUnseenRec(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername());
                     message = br.recommendationMethod(ud, vd);
-                } else if (type.equals("popular")) {
-                    User u = ud.getUserByUsername(user);
-                    if (u.getSubscription().equals("PREMIUM")) {
-                        PopularRec pr = new PopularRec(id, actionType, type, user);
-                        message = pr.recommendationMethod(ud, vd);
-                    } else {
-                        message = "PopularRecommendation cannot be applied!";
-                    }
-                } else if (type.equals("favorite")) {
-                    User u = ud.getUserByUsername(user);
-                    if (u.getSubscription().equals("PREMIUM")) {
-                        FavoriteRec fr = new FavoriteRec(id, actionType, type, user);
-                        message = fr.recommendationMethod(ud, vd);
-                    } else {
-                        message = "FavoriteRecommendation cannot be applied!";
-                    }
-                } else if (type.equals("search")) {
-                    User u = ud.getUserByUsername(user);
-                    if (u.getSubscription().equals("PREMIUM")) {
-                        SearchRec sr = new SearchRec(id, actionType, type, user, genre);
-                        message = sr.recommendationMethod(ud, vd);
-                    } else {
-                        message = "SearchRecommendation cannot be applied!";
-                    }
+
+                } else if (a.getType().equals(Constants.POPULAR)) {
+                    PopularRec pr = new PopularRec(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername());
+                    message = pr.recommendationMethod(ud, vd);
+
+                } else if (a.getType().equals(Constants.FAVORITE)) {
+                    FavoriteRec fr = new FavoriteRec(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername());
+                    message = fr.recommendationMethod(ud, vd);
+
+                } else if (a.getType().equals(Constants.SEARCH)) {
+                    SearchRec sr = new SearchRec(a.getActionId(), a.getActionType(),
+                            a.getType(), a.getUsername(), a.getGenre());
+                    message = sr.recommendationMethod(ud, vd);
                 }
             }
-            JSONObject object = writer.writeFile(id, message);
+            JSONObject object = writer.writeFile(a.getActionId(), message);
             array.add(object);
         }
     }

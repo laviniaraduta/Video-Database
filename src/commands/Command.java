@@ -4,6 +4,9 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 
+/**
+ * The parent class for all the 3 command actions
+ */
 public abstract class Command {
     private int actionId;
     private String actionType;

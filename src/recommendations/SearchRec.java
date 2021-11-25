@@ -1,5 +1,6 @@
 package recommendations;
 
+import common.Constants;
 import databases.UserDatabase;
 import databases.VideoDatabase;
 import entertainment.Video;
@@ -25,19 +26,23 @@ public final class SearchRec extends Recommendation {
 
     @Override
     public String recommendationMethod(final UserDatabase ud, final VideoDatabase vd) {
-        String message =  "SearchRecommendation ";
-        ArrayList<String> names = new ArrayList<>();
-        User user = ud.getUserByUsername(this.getUsername());
-        for (Video v : vd.getVideosByRatingByName()) {
-            if (!user.getHistory().containsKey(v.getName())
-                    && v.getGenres().contains(this.genre)) {
-                names.add(v.getName());
+        User u = ud.getUserByUsername(this.getUsername());
+        if (u.getSubscription().equals(Constants.PREMIUM)) {
+            String message = "SearchRecommendation ";
+            ArrayList<String> names = new ArrayList<>();
+            User user = ud.getUserByUsername(this.getUsername());
+            for (Video v : vd.getVideosByRatingByName()) {
+                if (!user.getHistory().containsKey(v.getName())
+                        && v.getGenres().contains(this.genre)) {
+                    names.add(v.getName());
+                }
+            }
+            if (names.size() != 0) {
+                return message + "result: " + names;
+            } else {
+                return message + "cannot be applied!";
             }
         }
-        if (names.size() != 0) {
-            return message + "result: " +  names;
-        } else {
-            return message + "cannot be applied!";
-        }
+        return "SearchRecommendation cannot be applied!";
     }
 }

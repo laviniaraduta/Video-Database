@@ -1,5 +1,6 @@
 package queries;
 
+import common.Constants;
 import databases.ActorDatabase;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
@@ -39,7 +40,7 @@ public final class MovieQuery extends Query {
         if (this.filters.get(0).get(0) != null) {
             year = Integer.valueOf(this.filters.get(0).get(0));
         }
-        if (this.getCriteria().equals("ratings")) {
+        if (this.getCriteria().equals(Constants.RATINGS)) {
             Map<String, Double> moviesWithRatings = new HashMap<>();
             for (Movie m : md.getMovies()) {
                 boolean condition;
@@ -58,7 +59,7 @@ public final class MovieQuery extends Query {
             List<String> names = formNameList(this.getSortType(),
                     moviesWithRatings, this.getNumber());
             message = message + names;
-        } else if (this.getCriteria().equals("favorite")) {
+        } else if (this.getCriteria().equals(Constants.FAVORITE)) {
             Map<String, Integer> moviesWithLikes = new HashMap<>();
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
@@ -79,7 +80,7 @@ public final class MovieQuery extends Query {
             List<String> names = formNameListInteger(this.getSortType(),
                     moviesWithLikes, this.getNumber());
             message = message + names;
-        } else if (this.getCriteria().equals("longest")) {
+        } else if (this.getCriteria().equals(Constants.LONGEST)) {
             Map<String, Integer> moviesWithDuration = new HashMap<>();
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
@@ -96,9 +97,8 @@ public final class MovieQuery extends Query {
             List<String> names = formNameListInteger(this.getSortType(),
                     moviesWithDuration, this.getNumber());
             message = message + names;
-        } else if (this.getCriteria().equals("most_viewed")) {
+        } else if (this.getCriteria().equals(Constants.MOST_VIEWED)) {
             Map<String, Integer> moviesWithViews = new HashMap<>();
-            List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
                 m.setViews(ud);

@@ -37,7 +37,7 @@ public final class ActorQuery extends Query {
     public String queryMethod(final ActorDatabase ad, final UserDatabase ud,
                               final MovieDatabase md, final SerialDatabase sd) {
         String message = "Query result: ";
-        if (this.getCriteria().equals("average")) {
+        if (this.getCriteria().equals(Constants.AVERAGE)) {
             Map<String, Double> actorsRatings = new HashMap<>();
             for (Actor a : ad.getActors()) {
                 Double rating = a.getTotalRating(md, sd);
@@ -48,7 +48,7 @@ public final class ActorQuery extends Query {
             List<String> names = formNameList(this.getSortType(), actorsRatings, this.getNumber());
             message = message + names;
 
-        } else if (this.getCriteria().equals("awards")) {
+        } else if (this.getCriteria().equals(Constants.AWARDS)) {
             List<String> mentionedAwards = this.filters.get(Constants.AWARDS_POS);
             Map<String, Integer> actorsAwards = new HashMap<>();
             for (Actor a : ad.getActors()) {
@@ -61,7 +61,7 @@ public final class ActorQuery extends Query {
                     actorsAwards, this.getNumber());
             message = message + names;
 
-        } else if (this.getCriteria().equals("filter_description")) {
+        } else if (this.getCriteria().equals(Constants.FILTER_DESCRIPTIONS)) {
             List<String> words = this.filters.get(2);
             List<String> actors = new ArrayList<String>();
             for (Actor a : ad.getActors()) {
@@ -69,9 +69,9 @@ public final class ActorQuery extends Query {
                     actors.add(a.getName());
                 }
             }
-            if (this.getSortType().equals("asc")) {
+            if (this.getSortType().equals(Constants.ASCENDING)) {
                 actors.sort(Comparator.naturalOrder());
-            } else if (this.getSortType().equals("desc")) {
+            } else if (this.getSortType().equals(Constants.DESCENDING)) {
                 actors.sort(Comparator.reverseOrder());
             }
             message = message + actors;
