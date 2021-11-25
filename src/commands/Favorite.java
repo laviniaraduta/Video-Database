@@ -7,13 +7,15 @@ import user.User;
 
 import java.util.Map;
 
-public class Favorite extends Command {
-    public Favorite(int actionId, String actionType, String type, String user, String title) {
+public final class Favorite extends Command {
+    public Favorite(final int actionId, final String actionType, final String type,
+                    final String user, final String title) {
         super(actionId, actionType, type, user, title);
     }
 
     @Override
-    public String commandMethod(UserDatabase ud, MovieDatabase md, SerialDatabase sd) {
+    public String commandMethod(final UserDatabase ud, final MovieDatabase md,
+                                final SerialDatabase sd) {
         String message;
         User user = ud.getUserByUsername(this.getUser());
 //        Movie movie = md.getMovieByTitle(this.getTitle());
@@ -21,12 +23,12 @@ public class Favorite extends Command {
         Map<String, Integer> history = user.getHistory();
         if (history.containsKey(this.getTitle())) {
             Boolean isAlreadyFav = false;
-            for(String title : user.getFavourite()) {
-                if(title.equals(this.getTitle())) {
+            for (String title : user.getFavourite()) {
+                if (title.equals(this.getTitle())) {
                     isAlreadyFav = true;
                 }
             }
-            if(isAlreadyFav == false) {
+            if (!isAlreadyFav) {
                 user.getFavourite().add(this.getTitle());
                 message = "success -> " + this.getTitle() + " was added as favourite";
             } else {

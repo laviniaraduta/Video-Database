@@ -1,2 +1,7 @@
 Starting audit...
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\entertainment\Video.java:70:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\entertainment\Video.java:84:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\main\Main.java:6:17: Using the '.*' form of import should be avoided - databases.*. [AvoidStarImport]
+[ERROR] C:\Users\lavin\Desktop\tema\.\src\utils\Utils.java:9:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
 Audit done.
+Checkstyle ends with 4 errors.

@@ -6,9 +6,7 @@ import entertainment.Genre;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * The class contains static methods that helps with parsing.
@@ -28,31 +26,30 @@ public final class Utils {
      * @return an Genre Enum
      */
     public static Genre stringToGenre(final String genre) {
-        return switch (genre.toLowerCase()) {
-            case "action" -> Genre.ACTION;
-            case "adventure" -> Genre.ADVENTURE;
-            case "drama" -> Genre.DRAMA;
-            case "comedy" -> Genre.COMEDY;
-            case "crime" -> Genre.CRIME;
-            case "romance" -> Genre.ROMANCE;
-            case "war" -> Genre.WAR;
-            case "history" -> Genre.HISTORY;
-            case "thriller" -> Genre.THRILLER;
-            case "mystery" -> Genre.MYSTERY;
-            case "family" -> Genre.FAMILY;
-            case "horror" -> Genre.HORROR;
-            case "fantasy" -> Genre.FANTASY;
-            case "science fiction" -> Genre.SCIENCE_FICTION;
-            case "action & adventure" -> Genre.ACTION_ADVENTURE;
-            case "sci-fi & fantasy" -> Genre.SCI_FI_FANTASY;
-            case "animation" -> Genre.ANIMATION;
-            case "kids" -> Genre.KIDS;
-            case "western" -> Genre.WESTERN;
-            case "tv movie" -> Genre.TV_MOVIE;
+        return switch (genre) {
+            case "Action" -> Genre.ACTION;
+            case "Action & Adventure" -> Genre.ACTION_ADVENTURE;
+            case "Adventure" -> Genre.ADVENTURE;
+            case "Animation" -> Genre.ANIMATION;
+            case "Comedy" -> Genre.COMEDY;
+            case "Crime" -> Genre.CRIME;
+            case "Drama" -> Genre.DRAMA;
+            case "Family" -> Genre.FAMILY;
+            case "Fantasy" -> Genre.FANTASY;
+            case "History" -> Genre.HISTORY;
+            case "Horror" -> Genre.HORROR;
+            case "Kids" -> Genre.KIDS;
+            case "Mystery" -> Genre.MYSTERY;
+            case "Romance" -> Genre.ROMANCE;
+            case "Sci-Fi & Fantasy" -> Genre.SCI_FI_FANTASY;
+            case "Science Fiction" -> Genre.SCIENCE_FICTION;
+            case "Thriller" -> Genre.THRILLER;
+            case "TV Movie" -> Genre.TV_MOVIE;
+            case "War" -> Genre.WAR;
+            case "Western" -> Genre.WESTERN;
             default -> null;
         };
     }
-
     /**
      * Transforms a string into an enum
      * @param award for actors
@@ -68,6 +65,7 @@ public final class Utils {
             default -> null;
         };
     }
+
 
     /**
      * Transforms an array of JSON's into an array of strings
@@ -123,4 +121,182 @@ public final class Utils {
 
         return mapVideos;
     }
+
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<String, Double>> sortByComparator(
+            final Map<String, Double> unsorted,
+            final boolean order) {
+        List<Map.Entry<String, Double>> list =
+                new ArrayList<Map.Entry<String, Double>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
+            @Override
+            public int compare(final Map.Entry<String, Double> o1,
+                               final Map.Entry<String, Double> o2) {
+                if (order) {
+                    if (Double.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Double.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Double.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Double.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<Genre, Integer>> sortByComparatorGenres(
+            final Map<Genre, Integer> unsorted,
+            final boolean order) {
+        List<Map.Entry<Genre, Integer>> list =
+                new ArrayList<Map.Entry<Genre, Integer>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Genre, Integer>>() {
+            @Override
+            public int compare(final Map.Entry<Genre, Integer> o1,
+                               final Map.Entry<Genre, Integer> o2) {
+                if (order) {
+                    if (Integer.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Double.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Integer.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Double.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<String, Integer>> sortByComparatorInteger(
+            final Map<String, Integer> unsorted,
+            final boolean order) {
+        List<Map.Entry<String, Integer>> list =
+                new ArrayList<Map.Entry<String, Integer>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(final Map.Entry<String, Integer> o1,
+                               final Map.Entry<String, Integer> o2) {
+                if (order) {
+                    if (Integer.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Integer.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Integer.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Integer.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+
+    /**
+     * @param list
+     * @param number
+     * @return
+     */
+    public static List<String> getNames(final List<Map.Entry<String, Double>> list,
+                                        final int number) {
+        List<String> names = new ArrayList<String>();
+        int index = 0;
+        for (Map.Entry<String, Double> entry : list) {
+            if (index < number) {
+                names.add(entry.getKey());
+                index++;
+            } else {
+                break;
+            }
+        }
+        return names;
+    }
+
+    /**
+     * @param list
+     * @param number
+     * @return
+     */
+    public static List<String> getNamesInteger(final List<Map.Entry<String, Integer>> list,
+                                               final int number) {
+        List<String> names = new ArrayList<String>();
+        int index = 0;
+        for (Map.Entry<String, Integer> entry : list) {
+            if (index < number) {
+                names.add(entry.getKey());
+                index++;
+            } else {
+                break;
+            }
+        }
+        return names;
+    }
+
+    /**
+     * @param type
+     * @param map
+     * @param number
+     * @return
+     */
+    public static List<String> formNameList(final String type,
+                                            final Map<String, Double> map,
+                                            final int number) {
+        List<String> names = null; // asc = true, desc = false
+        if (type.equals("asc")) {
+            List<Map.Entry<String, Double>> sortedMap = sortByComparator(map, true);
+            names = getNames(sortedMap, number);
+        } else if (type.equals("desc")) {
+            List<Map.Entry<String, Double>> sortedMap = sortByComparator(map, false);
+            names = getNames(sortedMap, number);
+        }
+        return names;
+    }
+
+    /**
+     * @param type
+     * @param map
+     * @param number
+     * @return
+     */
+    public static List<String> formNameListInteger(final String type,
+                                                   final Map<String, Integer> map,
+                                                   final int number) {
+        List<String> names = null;
+        if (type.equals("asc")) {
+            List<Map.Entry<String, Integer>> sortedMap = sortByComparatorInteger(map, true);
+            names = getNamesInteger(sortedMap, number);
+        } else if (type.equals("desc")) {
+            List<Map.Entry<String, Integer>> sortedMap = sortByComparatorInteger(map, false);
+            names = getNamesInteger(sortedMap, number);
+        }
+        return names;
+    }
+
 }

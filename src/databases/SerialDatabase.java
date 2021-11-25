@@ -5,12 +5,16 @@ import entertainment.Serial;
 import fileio.SerialInputData;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SerialDatabase {
+public final class SerialDatabase {
     private ArrayList<Serial> serials = new ArrayList<Serial>();
 
-    public void addSerials(ArrayList<SerialInputData> serials) {
-        for (SerialInputData s : serials) {
+    /**
+     * @param serialsList
+     */
+    public void addSerials(final List<SerialInputData> serialsList) {
+        for (SerialInputData s : serialsList) {
             String title = s.getTitle();
             int year = s.getYear();
             ArrayList<String> cast = s.getCast();
@@ -25,13 +29,17 @@ public class SerialDatabase {
         return serials;
     }
 
-    public void setSerials(ArrayList<Serial> serials) {
+    public void setSerials(final ArrayList<Serial> serials) {
         this.serials = serials;
     }
 
-    public Serial getSerialByTitle(String title) {
-        for(Serial s : this.serials) {
-            if(s.getName().equals(title)) {
+    /**
+     * @param title
+     * @return
+     */
+    public Serial getSerialByTitle(final String title) {
+        for (Serial s : this.serials) {
+            if (s.getName().equals(title)) {
                 return s;
             }
         }

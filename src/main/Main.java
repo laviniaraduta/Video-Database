@@ -3,6 +3,7 @@ package main;
 import checker.Checkstyle;
 import checker.Checker;
 import common.Constants;
+import databases.*;
 import fileio.Input;
 import fileio.InputLoader;
 import fileio.Writer;
@@ -71,7 +72,20 @@ public final class Main {
         JSONArray arrayResult = new JSONArray();
 
         //TODO add here the entry point to your implementation
-//        System.out.println(filePath1);
+        ActorDatabase actorDb = new ActorDatabase();
+        UserDatabase userDb = new UserDatabase();
+        MovieDatabase movieDb = new MovieDatabase();
+        SerialDatabase serialDb = new SerialDatabase();
+        ActionsDatabase actionDb = new ActionsDatabase();
+
+        actorDb.addActors(input.getActors());
+        userDb.addUsers(input.getUsers());
+        movieDb.addMovies(input.getMovies());
+        serialDb.addSerials(input.getSerials());
+//        VideoDatabase videoDb = new VideoDatabase(movieDb, serialDb);
+        actionDb.addActions(input.getCommands(), actorDb, movieDb,
+                serialDb, userDb, fileWriter, arrayResult);
+
 
         fileWriter.closeJSON(arrayResult);
     }

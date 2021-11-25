@@ -4,26 +4,16 @@ import entertainment.Movie;
 import fileio.MovieInputData;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MovieDatabase {
+public final class MovieDatabase {
     private ArrayList<Movie> movies = new ArrayList<Movie>();
-//    static int numberOfMovies = 0;
-//
-//    // fac singleton
-//    private static MovieDatabase MoviesDb = null;
-//    private MovieDatabase() {}
-//    public static MovieDatabase getFilmDb() {
-//        if (MoviesDb == null) {
-//            MoviesDb = new MovieDatabase();
-//        }
-//        numberOfMovies++;
-//        return MoviesDb;
-//    }
-//    public static int getNumberOfActors() {
-//        return numberOfMovies;
-//    }
-    public void addMovies(ArrayList<MovieInputData> movies) {
-        for (MovieInputData m : movies) {
+
+    /**
+     * @param moviesList
+     */
+    public void addMovies(final List<MovieInputData> moviesList) {
+        for (MovieInputData m : moviesList) {
             String title = m.getTitle();
             int year = m.getYear();
             ArrayList<String> cast = m.getCast();
@@ -37,13 +27,17 @@ public class MovieDatabase {
         return movies;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(final ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
-    public Movie getMovieByTitle(String title) {
-        for(Movie m : this.movies) {
-            if(m.getName().equals(title)) {
+    /**
+     * @param title
+     * @return
+     */
+    public Movie getMovieByTitle(final String title) {
+        for (Movie m : this.movies) {
+            if (m.getName().equals(title)) {
                 return m;
             }
         }

@@ -1,5 +1,10 @@
 package queries;
 
+import databases.ActorDatabase;
+import databases.MovieDatabase;
+import databases.SerialDatabase;
+import databases.UserDatabase;
+
 public abstract class Query {
     private int actionId;
     private String actionType;
@@ -9,8 +14,9 @@ public abstract class Query {
     private String sortType;
     private String criteria;
 
-    public Query(int actionId, String actionType, String objectType,
-                 int number, String username, String sortType, String criteria) {
+    public Query(final int actionId, final String actionType, final String objectType,
+                 final int number, final String username, final String sortType,
+                 final String criteria) {
         this.actionId = actionId;
         this.actionType = actionType;
         this.objectType = objectType;
@@ -20,61 +26,69 @@ public abstract class Query {
         this.criteria = criteria;
     }
 
-    public int getActionId() {
+    public final int getActionId() {
         return actionId;
     }
 
-    public void setActionId(int actionId) {
+    public final void setActionId(final int actionId) {
         this.actionId = actionId;
     }
 
-    public String getActionType() {
+    public final String getActionType() {
         return actionType;
     }
 
-    public void setActionType(String actionType) {
+    public final void setActionType(final String actionType) {
         this.actionType = actionType;
     }
 
-    public String getObjectType() {
+    public final String getObjectType() {
         return objectType;
     }
 
-    public void setObjectType(String objectType) {
+    public final void setObjectType(final String objectType) {
         this.objectType = objectType;
     }
 
-    public int getNumber() {
+    public final int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public final void setNumber(final int number) {
         this.number = number;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public final void setUsername(final String username) {
         this.username = username;
     }
 
-    public String getSortType() {
+    public final String getSortType() {
         return sortType;
     }
 
-    public void setSortType(String sortType) {
+    public final void setSortType(final String sortType) {
         this.sortType = sortType;
     }
 
-    public String getCriteria() {
+    public final String getCriteria() {
         return criteria;
     }
 
-    public void setCriteria(String criteria) {
+    public final void setCriteria(final String criteria) {
         this.criteria = criteria;
     }
 
-    abstract void queryMethod();
+    /**
+     * @param ad
+     * @param ud
+     * @param md
+     * @param sd
+     * @return
+     */
+    public abstract String queryMethod(ActorDatabase ad, UserDatabase ud,
+                                       MovieDatabase md, SerialDatabase sd);
 }
