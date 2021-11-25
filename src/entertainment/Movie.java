@@ -7,12 +7,19 @@ import java.util.ArrayList;
 
 public final class Movie extends Video {
     private int duration;
-    private Double rating;
     private ArrayList<Double> ratings = new ArrayList<Double>();
     public Movie(final String name, final Integer year, final int duration,
                  final ArrayList<String> genres, final ArrayList<String> cast) {
         super(name, year, cast, genres);
         this.duration = duration;
+    }
+
+    public Movie (final Movie m) {
+        super(m.getName(), m.getYear(), m.getCast(), m.getGenres());
+        this.rating = m.getRating();
+        this.ratings = m.getRatings();
+        this.duration = m.getDuration();
+
     }
 
     public int getDuration() {
@@ -21,10 +28,6 @@ public final class Movie extends Video {
 
     public void setDuration(final int duration) {
         this.duration = duration;
-    }
-
-    public Double getRating() {
-        return rating;
     }
 
     /**

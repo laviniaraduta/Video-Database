@@ -1,5 +1,8 @@
 package recommendations;
 
+import databases.UserDatabase;
+import databases.VideoDatabase;
+
 public class PopularRec extends Recommendation {
 
     public PopularRec(int actionId, String actionType, String type, String username) {
@@ -7,7 +10,8 @@ public class PopularRec extends Recommendation {
     }
 
     @Override
-    void recommendationMethod() {
+    public String recommendationMethod(UserDatabase ud, VideoDatabase vd) {
+        return null;
 
     }
 }

@@ -15,6 +15,7 @@ public final class Actor {
     private ArrayList<String> filmography;
     private Map<ActorsAwards, Integer> awards;
     private Map<String, Double> videoRatings = new HashMap<>();
+    Integer totalAwards;
 
     public Actor(final String name, final String careerDescription,
                  final ArrayList<String> filmography, final Map<ActorsAwards, Integer> awards) {
@@ -22,6 +23,7 @@ public final class Actor {
         this.careerDescription = careerDescription;
         this.filmography = filmography;
         this.awards = awards;
+        this.totalAwards = awards.values().stream().mapToInt(i->i).sum();
     }
 
     public String getName() {
@@ -86,14 +88,16 @@ public final class Actor {
         for (String title : this.filmography) {
             Movie movie = md.getMovieByTitle(title);
             if (movie != null) {
-                if (movie.getRating() != null) {
+                movie.setRating();
+                if (!movie.getRating().equals(0d)) {
                     ratingSum += movie.getRating();
                     number++;
                 }
             } else {
                 Serial serial = sd.getSerialByTitle(title);
                 if (serial != null) {
-                    if (serial.getRating() != null) {
+                    serial.setRating();
+                    if (!serial.getRating().equals(0d)) {
                         ratingSum += serial.getRating();
                         number++;
                     }
@@ -105,6 +109,14 @@ public final class Actor {
         } else {
             return (Double) (ratingSum / number);
         }
+    }
+
+    public Integer getTotalAwards() {
+        return totalAwards;
+    }
+
+    public void setTotalAwards(Integer totalAwards) {
+        this.totalAwards = totalAwards;
     }
 
     public Map<String, Double> getVideoRatings() {
@@ -119,13 +131,16 @@ public final class Actor {
         int total = 0, number = mentionedAwards.size();
         for (String award : mentionedAwards) {
             ActorsAwards a = ActorsAwards.valueOf(award);
-            if (this.getAwards().containsKey(a)) {
-                total += this.getAwards().get(a);
-            } else {
+//            if (this.getAwards().containsKey(a)) {
+//                total += this.getAwards().get(a);
+//            } else {
+//                return 0;
+//            }
+            if (!this.getAwards().containsKey(a)) {
                 return 0;
             }
         }
-        return total;
+        return this.totalAwards;
     }
 
     /**
@@ -134,12 +149,6 @@ public final class Actor {
      */
     public boolean hasWords(final List<String> words) {
         for (String w : words) {
-//            if (!this.getCareerDescription().matches(".* " + w + " .*")){
-//                return false;
-//            }
-//            if (!this.getCareerDescription().toLowerCase().contains(w.toLowerCase())) {
-//                return false;
-//            }
             String patternString = "[ -]" + w + "[ ,.]";
             Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(this.careerDescription);

@@ -6,8 +6,6 @@ import java.util.Map;
 
 public final class Serial extends Video {
     private int numberOfSeasons;
-    private Double rating;
-    private ArrayList<String> cast;
     private ArrayList<Season> seasons;
     private Map<Integer, Double> ratingPerSeason = new HashMap<>();
     private int totalDuration;
@@ -20,6 +18,14 @@ public final class Serial extends Video {
         this.seasons = seasons;
     }
 
+    public Serial (Serial s) {
+        super(s.getName(), s.getYear(), s.getCast(), s.getGenres());
+        this.rating = s.getRating();
+        this.numberOfSeasons = s.getNumberOfSeasons();
+        this.seasons = s.seasons;
+        this.ratingPerSeason = s.getRatingPerSeason();
+        this.totalDuration = s.getTotalDuration();
+    }
     public int getNumberOfSeasons() {
         return numberOfSeasons;
     }
@@ -45,11 +51,19 @@ public final class Serial extends Video {
             for (Double r : s.getRatings()) {
                 seasonSum = seasonSum + r;
             }
-            this.ratingPerSeason.put(index, (Double) (seasonSum / s.getRatings().size()));
+            if (s.getRatings().size() == 0) {
+                this.ratingPerSeason.put(index, 0d);
+            } else {
+                this.ratingPerSeason.put(index, (Double) (seasonSum / s.getRatings().size()));
+            }
             totalSum = totalSum + seasonSum;
             index++;
         }
-        this.rating = (Double) (totalSum / this.numberOfSeasons);
+        if (totalSum.equals(0d)) {
+            this.rating = 0d;
+        } else {
+            this.rating = (Double) (totalSum / this.numberOfSeasons);
+        }
     }
 
     public ArrayList<Season> getSeasons() {

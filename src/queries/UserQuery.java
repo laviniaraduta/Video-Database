@@ -26,7 +26,6 @@ public final class UserQuery extends Query {
         String message = "Query result: ";
         Map<String, Integer> userWithRatings = new HashMap<>();
         for (User u : ud.getUsers()) {
-//            u.setNumberOfRatings();
             if (!u.getNumberOfRatings().equals(0)) {
                 userWithRatings.put(u.getUsername(), u.getNumberOfRatings());
             }

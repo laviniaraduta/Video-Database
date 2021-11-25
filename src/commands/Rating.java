@@ -36,7 +36,7 @@ public final class Rating extends Command {
         this.season = season;
     }
     // true daca title e film fals daca e serial
-    private Boolean isMovie(final String title, final MovieDatabase md, final SerialDatabase sd) {
+    private boolean isMovie(final String title, final MovieDatabase md, final SerialDatabase sd) {
         for (Movie m : md.getMovies()) {
             if (m.getName().equals(title)) {
                 return true;

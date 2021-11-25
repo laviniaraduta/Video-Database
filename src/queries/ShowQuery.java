@@ -37,12 +37,11 @@ public final class ShowQuery extends Query {
             Integer year;
             List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
-                boolean condition;
                 s.setRating();
-                condition = s.getRating() != 0;
+                boolean condition = !s.getRating().equals(0d);
                 if (this.filters.get(0).get(0) != null) {
                     year = Integer.valueOf(this.filters.get(0).get(0));
-                    condition = condition && (s.getYear() == year);
+                    condition = condition && (s.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
                     condition = condition && s.getGenres().containsAll(this.filters.get(1));
@@ -62,7 +61,7 @@ public final class ShowQuery extends Query {
             for (Serial s : sd.getSerials()) {
                 boolean condition = true;
                 s.setLikes(ud);
-                if (s.getLikes() == 0) {
+                if (s.getLikes().equals(0)) {
                     condition = false;
                 }
                 if (this.filters.get(0).get(0) != null) {

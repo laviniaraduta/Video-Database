@@ -12,6 +12,17 @@ public class Video {
     private ArrayList<String> genres;
     private Integer likes;
     private Integer views;
+    private Integer indexInVideoList;
+    public Double rating;
+
+    public Video (Video v) {
+        this.name = v.name;
+        this.year = v.year;
+        this.genres = v.genres;
+        this.cast = v.cast;
+        this.views = v.views;
+        this.likes = v.likes;
+    }
     public Video(final String name, final int year,
                  final ArrayList<String> cast, final ArrayList<String> genres) {
         this.name = name;
@@ -78,5 +89,17 @@ public class Video {
             }
         }
         this.views = views;
+    }
+
+    public Integer getIndexInVideoList() {
+        return indexInVideoList;
+    }
+
+    public void setIndexInVideoList(Integer indexInVideoList) {
+        this.indexInVideoList = indexInVideoList;
+    }
+
+    public Double getRating() {
+        return rating;
     }
 }
