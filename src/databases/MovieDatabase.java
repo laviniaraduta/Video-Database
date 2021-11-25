@@ -10,7 +10,8 @@ public final class MovieDatabase {
     private ArrayList<Movie> movies = new ArrayList<Movie>();
 
     /**
-     * @param moviesList
+     * Populates the movie database with movies read from a file
+     * @param moviesList list of movies read from the file
      */
     public void addMovies(final List<MovieInputData> moviesList) {
         for (MovieInputData m : moviesList) {
@@ -32,8 +33,9 @@ public final class MovieDatabase {
     }
 
     /**
-     * @param title
-     * @return
+     * Returns the movie that has the given title from the database
+     * @param title the title of the movie
+     * @return movie object found, null if not found
      */
     public Movie getMovieByTitle(final String title) {
         for (Movie m : this.movies) {

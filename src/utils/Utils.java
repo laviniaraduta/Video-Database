@@ -123,9 +123,10 @@ public final class Utils {
     }
 
     /**
-     * @param unsorted
-     * @param order
-     * @return
+     * Sorts a map containing entries of form String -> Double
+     * @param unsorted the map that needs to be sorted
+     * @param order true for ascending order, false for descending
+     * @return a sorted list of map entries
      */
     public static List<Map.Entry<String, Double>> sortByComparator(
             final Map<String, Double> unsorted,
@@ -155,9 +156,10 @@ public final class Utils {
     }
 
     /**
-     * @param unsorted
-     * @param order
-     * @return
+     * Sorts a map containing entries of form Genre -> Integer
+     * @param unsorted the map that needs to be sorted
+     * @param order true for ascending order, false for descending
+     * @return a sorted list of map entries
      */
     public static List<Map.Entry<Genre, Integer>> sortByComparatorGenres(
             final Map<Genre, Integer> unsorted,
@@ -187,9 +189,10 @@ public final class Utils {
     }
 
     /**
-     * @param unsorted
-     * @param order
-     * @return
+     * Sorts a map containing entries of form String -> Integer
+     * @param unsorted the map that needs to be sorted
+     * @param order true for ascending order, false for descending
+     * @return a sorted list of map entries
      */
     public static List<Map.Entry<String, Integer>> sortByComparatorInteger(
             final Map<String, Integer> unsorted,
@@ -220,8 +223,9 @@ public final class Utils {
 
 
     /**
-     * @param list
-     * @param number
+     * Gets the Strings list from the list of map entries
+     * @param list list of map entries
+     * @param number the number of names we need
      * @return
      */
     public static List<String> getNames(final List<Map.Entry<String, Double>> list,
@@ -240,8 +244,9 @@ public final class Utils {
     }
 
     /**
-     * @param list
-     * @param number
+     * Gets the Strings list from the list of map entries
+     * @param list list of map entries
+     * @param number the number of names we need
      * @return
      */
     public static List<String> getNamesInteger(final List<Map.Entry<String, Integer>> list,
@@ -260,9 +265,10 @@ public final class Utils {
     }
 
     /**
-     * @param type
-     * @param map
-     * @param number
+     * Sorts the map and returns th elist of names from it
+     * @param type the type of sort
+     * @param map the map that needs to be sorted
+     * @param number the number of values we need
      * @return
      */
     public static List<String> formNameList(final String type,
@@ -280,9 +286,10 @@ public final class Utils {
     }
 
     /**
-     * @param type
-     * @param map
-     * @param number
+     * Sorts the map and returns th elist of names from it
+     * @param type the type of sort
+     * @param map the map that needs to be sorted
+     * @param number the number of values we need
      * @return
      */
     public static List<String> formNameListInteger(final String type,

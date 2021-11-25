@@ -16,7 +16,6 @@ public final class View extends Command {
     @Override
     public String commandMethod(final UserDatabase ud, final MovieDatabase md,
                                 final SerialDatabase sd) {
-        String message = null;
         User user = ud.getUserByUsername(this.getUser());
         Map<String, Integer> history = user.getHistory();
         if (history.containsKey(this.getTitle())) {
@@ -25,7 +24,7 @@ public final class View extends Command {
         } else {
             history.put(this.getTitle(), 1);
         }
-        message = "success -> " + this.getTitle()
+        String message = "success -> " + this.getTitle()
                     + " was viewed with total views of "
                     + user.getHistory().get(this.getTitle());
 

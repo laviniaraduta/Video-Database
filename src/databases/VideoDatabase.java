@@ -41,6 +41,10 @@ public final class VideoDatabase {
             this.videosByRatingByName.add(s);
 
         }
+
+        /**
+         * Sorts the list of videos, descending by their rating
+         */
         Collections.sort(this.videosByRating, new Comparator<Video>() {
             @Override
             public int compare(final Video o1, final Video o2) {
@@ -51,26 +55,41 @@ public final class VideoDatabase {
                 }
             }
         });
+
+        /**
+         * Sorts the list of videos, descending by their number of views
+         * The second criteria is by their index in the video list, ascending
+         */
         Collections.sort(this.videosByViews, new Comparator<Video>() {
             @Override
             public int compare(final Video o1, final Video o2) {
-                if (Integer.compare(o2.getViews(), o1.getViews()) == 0) {
+                if (o2.getViews() == o1.getViews()) {
                     return o1.getIndexInVideoList() - o2.getIndexInVideoList();
                 } else {
                     return Integer.compare(o2.getViews(), o1.getViews());
                 }
             }
         });
+
+        /**
+         * Sorts the list of videos, descending by their likes number
+         * The second criteria is by their index in the video list, ascending
+         */
         Collections.sort(this.videosByLikes, new Comparator<Video>() {
             @Override
             public int compare(final Video o1, final Video o2) {
-                if (Integer.compare(o2.getLikes(), o1.getLikes()) == 0) {
+                if (o2.getLikes() == o1.getLikes()) {
                     return o1.getIndexInVideoList() - o2.getIndexInVideoList();
                 } else {
                     return Integer.compare(o2.getLikes(), o1.getLikes());
                 }
             }
         });
+
+        /**
+         * Sorts the video list ascending by their rating
+         * The second criteria is the name, in ascending order
+         */
         Collections.sort(this.videosByRatingByName, new Comparator<Video>() {
             @Override
             public int compare(final Video o1, final Video o2) {
@@ -83,7 +102,6 @@ public final class VideoDatabase {
         });
 
     }
-
 
     public List<Video> getVideoList() {
         return videoList;

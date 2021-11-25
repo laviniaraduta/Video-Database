@@ -35,7 +35,14 @@ public final class Rating extends Command {
     public void setSeason(final int season) {
         this.season = season;
     }
-    // true daca title e film fals daca e serial
+
+    /**
+     * Function that tells if a video with the title given is a movie or a show
+     * @param title the title of yhe video
+     * @param md the database containing all the movies
+     * @param sd the database containing all the shows
+     * @return true for movie, false for shows
+     */
     private boolean isMovie(final String title, final MovieDatabase md, final SerialDatabase sd) {
         for (Movie m : md.getMovies()) {
             if (m.getName().equals(title)) {

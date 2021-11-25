@@ -27,13 +27,14 @@ import user.User;
 
 public final  class ActionsDatabase {
     /**
-     * @param actions
-     * @param ad
-     * @param md
-     * @param sd
-     * @param ud
-     * @param writer
-     * @param array
+     * Decides the type of action and runs the corresponding methods
+     * @param actions the list of parsed actions
+     * @param ad the database containing all the actors
+     * @param md the database containing all the movies
+     * @param sd the database containing all the shows
+     * @param ud the database containing all the users
+     * @param writer object that writes the output to a file
+     * @param array an array of JSONObjects
      * @throws IOException
      */
     public void addActions(final List<ActionInputData> actions, final ActorDatabase ad,

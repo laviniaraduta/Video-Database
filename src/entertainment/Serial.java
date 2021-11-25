@@ -36,7 +36,8 @@ public final class Serial extends Video {
 
 
     /**
-     *
+     * Computes the average total rating of the serial
+     * Computes the rating / season
      */
     // seteaza ratingul total al serialului si calculeaza si ratingul/sezon
     public void setRating() {
@@ -75,7 +76,7 @@ public final class Serial extends Video {
     }
 
     /**
-     *
+     * Computes the total duration of a show adding all the season's durations
      */
     public void setTotalDuration() {
         int duration = 0;

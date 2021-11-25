@@ -31,21 +31,21 @@ public final class MovieQuery extends Query {
     }
 
 
-
     @Override
     public String queryMethod(final ActorDatabase ad, final UserDatabase ud,
                               final MovieDatabase md, final SerialDatabase sd) {
         String message = "Query result: ";
+        Integer year = null;
+        if (this.filters.get(0).get(0) != null) {
+            year = Integer.valueOf(this.filters.get(0).get(0));
+        }
         if (this.getCriteria().equals("ratings")) {
             Map<String, Double> moviesWithRatings = new HashMap<>();
-            Integer year;
-            List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
                 boolean condition;
                 m.setRating();
                 condition = m.getRating() != 0;
                 if (this.filters.get(0).get(0) != null) {
-                    year = Integer.valueOf(this.filters.get(0).get(0));
                     condition = condition && (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
@@ -60,8 +60,6 @@ public final class MovieQuery extends Query {
             message = message + names;
         } else if (this.getCriteria().equals("favorite")) {
             Map<String, Integer> moviesWithLikes = new HashMap<>();
-            Integer year;
-            List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
                 m.setLikes(ud);
@@ -69,7 +67,6 @@ public final class MovieQuery extends Query {
                     condition = false;
                 }
                 if (this.filters.get(0).get(0) != null) {
-                    year = Integer.valueOf(this.filters.get(0).get(0));
                     condition = condition && (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
@@ -84,12 +81,9 @@ public final class MovieQuery extends Query {
             message = message + names;
         } else if (this.getCriteria().equals("longest")) {
             Map<String, Integer> moviesWithDuration = new HashMap<>();
-            Integer year;
-            List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
                 if (this.filters.get(0).get(0) != null) {
-                    year = Integer.valueOf(this.filters.get(0).get(0));
                     condition = (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {
@@ -104,7 +98,6 @@ public final class MovieQuery extends Query {
             message = message + names;
         } else if (this.getCriteria().equals("most_viewed")) {
             Map<String, Integer> moviesWithViews = new HashMap<>();
-            Integer year;
             List<String> genres = this.filters.get(1);
             for (Movie m : md.getMovies()) {
                 boolean condition = true;
@@ -113,7 +106,6 @@ public final class MovieQuery extends Query {
                     condition = false;
                 }
                 if (this.filters.get(0).get(0) != null) {
-                    year = Integer.valueOf(this.filters.get(0).get(0));
                     condition = condition && (m.getYear().equals(year));
                 }
                 if (this.filters.get(1).get(0) != null) {

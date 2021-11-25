@@ -68,8 +68,8 @@ public class Video {
     }
 
     /**
-     *
-     * @param ud
+     * Computes the total number of likes for a video
+     * @param ud the users database
      */
     public final void setLikes(final UserDatabase ud) {
         int numOfLikes = 0;
@@ -86,8 +86,8 @@ public class Video {
     }
 
     /**
-     *
-     * @param ud
+     * Computes the total number of views for a video
+     * @param ud the users database
      */
     public final void setViews(final UserDatabase ud) {
         int numOfViews = 0;
