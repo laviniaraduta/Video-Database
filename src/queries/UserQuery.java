@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.Utils.formNameList;
 import static utils.Utils.formNameListInteger;
 
 public final class UserQuery extends Query {

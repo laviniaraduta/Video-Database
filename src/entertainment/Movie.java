@@ -1,8 +1,5 @@
 package entertainment;
 
-import databases.UserDatabase;
-import user.User;
-
 import java.util.ArrayList;
 
 public final class Movie extends Video {
@@ -14,9 +11,9 @@ public final class Movie extends Video {
         this.duration = duration;
     }
 
-    public Movie (final Movie m) {
+    public Movie(final Movie m) {
         super(m.getName(), m.getYear(), m.getCast(), m.getGenres());
-        this.rating = m.getRating();
+        this.setRating(m.getRating());
         this.ratings = m.getRatings();
         this.duration = m.getDuration();
 
@@ -39,9 +36,9 @@ public final class Movie extends Video {
             sum = sum + i;
         }
         if (this.ratings.size() == 0) {
-            this.rating = 0d;
+            this.setRating(0d);
         } else {
-            this.rating = (Double) (sum / this.ratings.size());
+            this.setRating((Double) (sum / this.ratings.size()));
         }
     }
     public ArrayList<Double> getRatings() {

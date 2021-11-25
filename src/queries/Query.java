@@ -15,7 +15,8 @@ public abstract class Query {
     private String criteria;
 
     public Query(final int actionId, final String actionType, final String objectType,
-                 final int number, final String username, final String sortType, final String criteria) {
+                 final int number, final String username, final String sortType,
+                 final String criteria) {
         this.actionId = actionId;
         this.actionType = actionType;
         this.objectType = objectType;

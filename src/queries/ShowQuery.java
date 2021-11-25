@@ -4,12 +4,15 @@ import databases.ActorDatabase;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
-import entertainment.Movie;
 import entertainment.Serial;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static utils.Utils.*;
+import static utils.Utils.formNameList;
+import static utils.Utils.formNameListInteger;
+
 
 public final class ShowQuery extends Query {
     private List<List<String>> filters;
@@ -35,7 +38,6 @@ public final class ShowQuery extends Query {
         if (this.getCriteria().equals("ratings")) {
             Map<String, Double> showsWithRatings = new HashMap<>();
             Integer year;
-            List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
                 s.setRating();
                 boolean condition = !s.getRating().equals(0d);
@@ -56,7 +58,6 @@ public final class ShowQuery extends Query {
         } else if (this.getCriteria().equals("favorite")) {
             Map<String, Integer> showsWithLikes = new HashMap<>();
             Integer year;
-
             List<String> genres = this.filters.get(1);
             for (Serial s : sd.getSerials()) {
                 boolean condition = true;
@@ -78,7 +79,6 @@ public final class ShowQuery extends Query {
             List<String> names = formNameListInteger(this.getSortType(),
                     showsWithLikes, this.getNumber());
             message = message + names;
-//            System.out.println(message);
         } else if (this.getCriteria().equals("longest")) {
             Map<String, Integer> showsWithDuration = new HashMap<>();
             Integer year;

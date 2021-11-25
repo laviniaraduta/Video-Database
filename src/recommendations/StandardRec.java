@@ -5,18 +5,16 @@ import databases.VideoDatabase;
 import entertainment.Video;
 import user.User;
 
-import java.util.List;
+public final class StandardRec extends Recommendation {
 
-public class StandardRec extends Recommendation {
-
-    public StandardRec(int actionId, String actionType, String type,
-                       String username) {
+    public StandardRec(final int actionId, final String actionType,
+                       final String type, final String username) {
         super(actionId, actionType, type, username);
     }
 
 
     @Override
-    public String recommendationMethod(UserDatabase ud, VideoDatabase vd) {
+    public String recommendationMethod(final UserDatabase ud, final VideoDatabase vd) {
         String message = "StandardRecommendation ";
         String result = null;
         User user = ud.getUserByUsername(this.getUsername());

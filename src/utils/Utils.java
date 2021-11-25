@@ -26,31 +26,30 @@ public final class Utils {
      * @return an Genre Enum
      */
     public static Genre stringToGenre(final String genre) {
-        return switch (genre.toLowerCase()) {
-            case "action" -> Genre.ACTION;
-            case "adventure" -> Genre.ADVENTURE;
-            case "drama" -> Genre.DRAMA;
-            case "comedy" -> Genre.COMEDY;
-            case "crime" -> Genre.CRIME;
-            case "romance" -> Genre.ROMANCE;
-            case "war" -> Genre.WAR;
-            case "history" -> Genre.HISTORY;
-            case "thriller" -> Genre.THRILLER;
-            case "mystery" -> Genre.MYSTERY;
-            case "family" -> Genre.FAMILY;
-            case "horror" -> Genre.HORROR;
-            case "fantasy" -> Genre.FANTASY;
-            case "science fiction" -> Genre.SCIENCE_FICTION;
-            case "action & adventure" -> Genre.ACTION_ADVENTURE;
-            case "sci-fi & fantasy" -> Genre.SCI_FI_FANTASY;
-            case "animation" -> Genre.ANIMATION;
-            case "kids" -> Genre.KIDS;
-            case "western" -> Genre.WESTERN;
-            case "tv movie" -> Genre.TV_MOVIE;
+        return switch (genre) {
+            case "Action" -> Genre.ACTION;
+            case "Action & Adventure" -> Genre.ACTION_ADVENTURE;
+            case "Adventure" -> Genre.ADVENTURE;
+            case "Animation" -> Genre.ANIMATION;
+            case "Comedy" -> Genre.COMEDY;
+            case "Crime" -> Genre.CRIME;
+            case "Drama" -> Genre.DRAMA;
+            case "Family" -> Genre.FAMILY;
+            case "Fantasy" -> Genre.FANTASY;
+            case "History" -> Genre.HISTORY;
+            case "Horror" -> Genre.HORROR;
+            case "Kids" -> Genre.KIDS;
+            case "Mystery" -> Genre.MYSTERY;
+            case "Romance" -> Genre.ROMANCE;
+            case "Sci-Fi & Fantasy" -> Genre.SCI_FI_FANTASY;
+            case "Science Fiction" -> Genre.SCIENCE_FICTION;
+            case "Thriller" -> Genre.THRILLER;
+            case "TV Movie" -> Genre.TV_MOVIE;
+            case "War" -> Genre.WAR;
+            case "Western" -> Genre.WESTERN;
             default -> null;
         };
     }
-
     /**
      * Transforms a string into an enum
      * @param award for actors
@@ -66,6 +65,7 @@ public final class Utils {
             default -> null;
         };
     }
+
 
     /**
      * Transforms an array of JSON's into an array of strings
@@ -144,6 +144,38 @@ public final class Utils {
                     }
                 } else {
                     if (Double.compare(o2.getValue(), o1.getValue()) == 0) {
+                        return o2.getKey().compareTo(o1.getKey());
+                    } else {
+                        return Double.compare(o2.getValue(), o1.getValue());
+                    }
+                }
+            }
+        });
+        return list;
+    }
+
+    /**
+     * @param unsorted
+     * @param order
+     * @return
+     */
+    public static List<Map.Entry<Genre, Integer>> sortByComparatorGenres(
+            final Map<Genre, Integer> unsorted,
+            final boolean order) {
+        List<Map.Entry<Genre, Integer>> list =
+                new ArrayList<Map.Entry<Genre, Integer>>(unsorted.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<Genre, Integer>>() {
+            @Override
+            public int compare(final Map.Entry<Genre, Integer> o1,
+                               final Map.Entry<Genre, Integer> o2) {
+                if (order) {
+                    if (Integer.compare(o1.getValue(), o2.getValue()) == 0) {
+                        return o1.getKey().compareTo(o2.getKey());
+                    } else {
+                        return Double.compare(o1.getValue(), o2.getValue());
+                    }
+                } else {
+                    if (Integer.compare(o2.getValue(), o1.getValue()) == 0) {
                         return o2.getKey().compareTo(o1.getKey());
                     } else {
                         return Double.compare(o2.getValue(), o1.getValue());

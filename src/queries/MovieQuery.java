@@ -6,9 +6,12 @@ import databases.SerialDatabase;
 import databases.UserDatabase;
 import entertainment.Movie;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static utils.Utils.*;
+import static utils.Utils.formNameList;
+import static utils.Utils.formNameListInteger;
 
 public final class MovieQuery extends Query {
     private List<List<String>> filters;

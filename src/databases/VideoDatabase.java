@@ -4,13 +4,12 @@ import entertainment.Movie;
 import entertainment.Serial;
 import entertainment.Video;
 
-import javax.print.DocFlavor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-import static utils.Utils.formNameList;
-import static utils.Utils.formNameListInteger;
-
-public class VideoDatabase {
+public final class VideoDatabase {
     private List<Video> videoList;
     private List<Video> videosByRating = new ArrayList<>();
     private List<Video> videosByViews = new ArrayList<>();
@@ -44,7 +43,7 @@ public class VideoDatabase {
         }
         Collections.sort(this.videosByRating, new Comparator<Video>() {
             @Override
-            public int compare(Video o1, Video o2) {
+            public int compare(final Video o1, final Video o2) {
                 if (Double.compare(o2.getRating(), o1.getRating()) == 0) {
                     return o1.getIndexInVideoList() - o2.getIndexInVideoList();
                 } else {
@@ -54,7 +53,7 @@ public class VideoDatabase {
         });
         Collections.sort(this.videosByViews, new Comparator<Video>() {
             @Override
-            public int compare(Video o1, Video o2) {
+            public int compare(final Video o1, final Video o2) {
                 if (Integer.compare(o2.getViews(), o1.getViews()) == 0) {
                     return o1.getIndexInVideoList() - o2.getIndexInVideoList();
                 } else {
@@ -64,7 +63,7 @@ public class VideoDatabase {
         });
         Collections.sort(this.videosByLikes, new Comparator<Video>() {
             @Override
-            public int compare(Video o1, Video o2) {
+            public int compare(final Video o1, final Video o2) {
                 if (Integer.compare(o2.getLikes(), o1.getLikes()) == 0) {
                     return o1.getIndexInVideoList() - o2.getIndexInVideoList();
                 } else {
@@ -74,7 +73,7 @@ public class VideoDatabase {
         });
         Collections.sort(this.videosByRatingByName, new Comparator<Video>() {
             @Override
-            public int compare(Video o1, Video o2) {
+            public int compare(final Video o1, final Video o2) {
                 if (Double.compare(o1.getRating(), o2.getRating()) == 0) {
                     return o1.getName().compareTo(o2.getName());
                 } else {
@@ -94,7 +93,7 @@ public class VideoDatabase {
         return videosByRating;
     }
 
-    public void setVideosByRating(List<Video> videosByRating) {
+    public void setVideosByRating(final List<Video> videosByRating) {
         this.videosByRating = videosByRating;
     }
 
@@ -102,7 +101,7 @@ public class VideoDatabase {
         return videosByViews;
     }
 
-    public void setVideosByViews(List<Video> videosByViews) {
+    public void setVideosByViews(final List<Video> videosByViews) {
         this.videosByViews = videosByViews;
     }
 
@@ -110,7 +109,7 @@ public class VideoDatabase {
         return videosByLikes;
     }
 
-    public void setVideosByLikes(List<Video> videosByLikes) {
+    public void setVideosByLikes(final List<Video> videosByLikes) {
         this.videosByLikes = videosByLikes;
     }
 
@@ -118,7 +117,8 @@ public class VideoDatabase {
         return videosByRatingByName;
     }
 
-    public void setVideosByRatingByName(List<Video> videosByRatingByName) {
+    public void setVideosByRatingByName(final List<Video> videosByRatingByName) {
         this.videosByRatingByName = videosByRatingByName;
     }
+
 }

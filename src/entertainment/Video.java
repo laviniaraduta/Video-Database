@@ -13,9 +13,9 @@ public class Video {
     private Integer likes;
     private Integer views;
     private Integer indexInVideoList;
-    public Double rating;
+    private Double rating;
 
-    public Video (Video v) {
+    public Video(final Video v) {
         this.name = v.name;
         this.year = v.year;
         this.genres = v.genres;
@@ -63,43 +63,46 @@ public class Video {
         this.genres = genres;
     }
 
-    public Integer getLikes() {
+    public final Integer getLikes() {
         return this.likes;
     }
 
-    public void setLikes(final UserDatabase ud) {
-        int likes = 0;
+    public final void setLikes(final UserDatabase ud) {
+        int numOfLikes = 0;
         for (User u : ud.getUsers()) {
             if (u.getFavourite().contains(this.getName())) {
-                likes++;
+                numOfLikes++;
             }
         }
-        this.likes = likes;
+        this.likes = numOfLikes;
     }
 
-    public Integer getViews() {
+    public final Integer getViews() {
         return this.views;
     }
 
-    public void setViews(final UserDatabase ud) {
-        int views = 0;
+    public final void setViews(final UserDatabase ud) {
+        int numOfViews = 0;
         for (User u : ud.getUsers()) {
             if (u.getHistory().containsKey(this.getName())) {
-                views += u.getHistory().get(this.getName());
+                numOfViews += u.getHistory().get(this.getName());
             }
         }
-        this.views = views;
+        this.views = numOfViews;
     }
 
-    public Integer getIndexInVideoList() {
+    public final Integer getIndexInVideoList() {
         return indexInVideoList;
     }
 
-    public void setIndexInVideoList(Integer indexInVideoList) {
+    public final void setIndexInVideoList(final Integer indexInVideoList) {
         this.indexInVideoList = indexInVideoList;
     }
 
-    public Double getRating() {
+    public final Double getRating() {
         return rating;
+    }
+    public final void setRating(final Double rating) {
+        this.rating = rating;
     }
 }

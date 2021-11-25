@@ -73,7 +73,7 @@ public final class User {
         return numberOfRatings;
     }
 
-    public void setNumberOfRatings(Integer rating) {
+    public void setNumberOfRatings(final Integer rating) {
         this.numberOfRatings = rating;
     }
 }

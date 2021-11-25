@@ -5,7 +5,10 @@ import databases.SerialDatabase;
 import entertainment.Movie;
 import entertainment.Serial;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +18,7 @@ public final class Actor {
     private ArrayList<String> filmography;
     private Map<ActorsAwards, Integer> awards;
     private Map<String, Double> videoRatings = new HashMap<>();
-    Integer totalAwards;
+    private Integer totalAwards;
 
     public Actor(final String name, final String careerDescription,
                  final ArrayList<String> filmography, final Map<ActorsAwards, Integer> awards) {
@@ -23,7 +26,7 @@ public final class Actor {
         this.careerDescription = careerDescription;
         this.filmography = filmography;
         this.awards = awards;
-        this.totalAwards = awards.values().stream().mapToInt(i->i).sum();
+        this.totalAwards = awards.values().stream().mapToInt(i -> i).sum();
     }
 
     public String getName() {
@@ -57,25 +60,6 @@ public final class Actor {
     public void setAwards(final Map<ActorsAwards, Integer> awards) {
         this.awards = awards;
     }
-
-//    public void setVideoRatings(MovieDatabase md, SerialDatabase sd) {
-//        for (String title : this.filmography) {
-//            Movie movie = md.getMovieByTitle(title);
-//            if (movie != null) {
-//                if (movie.getRating() != null) {
-//                    this.videoRatings.put(title, movie.getRating());
-//                }
-//            } else {
-//                Serial serial = sd.getSerialByTitle(title);
-//                if (serial != null) {
-//                    if (serial.getRating() != null) {
-//                        this.videoRatings.put(title, serial.getRating());
-//                    }
-//                }
-//            }
-//        }
-//    }
-
 
     /**
      * @param md
@@ -115,13 +99,14 @@ public final class Actor {
         return totalAwards;
     }
 
-    public void setTotalAwards(Integer totalAwards) {
+    public void setTotalAwards(final Integer totalAwards) {
         this.totalAwards = totalAwards;
     }
 
     public Map<String, Double> getVideoRatings() {
         return videoRatings;
     }
+
 
     /**
      * @param mentionedAwards

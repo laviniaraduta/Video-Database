@@ -2,56 +2,57 @@ package recommendations;
 
 import databases.UserDatabase;
 import databases.VideoDatabase;
-import entertainment.Video;
-
-import java.util.List;
 
 public abstract class Recommendation {
     private int actionId;
     private String actionType;
     private String type;
     private String username;
-//    private List<Video> videoList;
 
-    public Recommendation(int actionId, String actionType, String type, String username) {
+    public Recommendation(final int actionId, final String actionType,
+                          final String type, final String username) {
         this.actionId = actionId;
         this.actionType = actionType;
         this.type = type;
         this.username = username;
-//        this.videoList = vl;
     }
 
-    public int getActionId() {
+    public final int getActionId() {
         return actionId;
     }
 
-    public void setActionId(int actionId) {
+    public final void setActionId(final int actionId) {
         this.actionId = actionId;
     }
 
-    public String getActionType() {
+    public final String getActionType() {
         return actionType;
     }
 
-    public void setActionType(String actionType) {
+    public final void setActionType(final String actionType) {
         this.actionType = actionType;
     }
 
-    public String getType() {
+    public final String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public final void setType(final String type) {
         this.type = type;
     }
 
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public final void setUsername(final String username) {
         this.username = username;
     }
 
+    /**
+     * @param ud
+     * @param vd
+     * @return
+     */
     public abstract String recommendationMethod(UserDatabase ud, VideoDatabase vd);
 }

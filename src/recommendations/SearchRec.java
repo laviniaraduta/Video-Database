@@ -7,9 +7,10 @@ import user.User;
 
 import java.util.ArrayList;
 
-public class SearchRec extends Recommendation {
+public final class SearchRec extends Recommendation {
     private String genre;
-    public SearchRec(int actionId, String actionType, String type, String username, String genre) {
+    public SearchRec(final int actionId, final String actionType, final String type,
+                     final String username, final String genre) {
         super(actionId, actionType, type, username);
         this.genre = genre;
     }
@@ -18,18 +19,18 @@ public class SearchRec extends Recommendation {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(final String genre) {
         this.genre = genre;
     }
 
     @Override
-    public String recommendationMethod(UserDatabase ud, VideoDatabase vd) {
+    public String recommendationMethod(final UserDatabase ud, final VideoDatabase vd) {
         String message =  "SearchRecommendation ";
-        String result = null;
-        ArrayList<String > names = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
         User user = ud.getUserByUsername(this.getUsername());
         for (Video v : vd.getVideosByRatingByName()) {
-            if (!user.getHistory().containsKey(v.getName()) && v.getGenres().contains(this.genre)){
+            if (!user.getHistory().containsKey(v.getName())
+                    && v.getGenres().contains(this.genre)) {
                 names.add(v.getName());
             }
         }

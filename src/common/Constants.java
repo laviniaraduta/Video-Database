@@ -75,4 +75,5 @@ public final class Constants {
     public static final int MAX_LENGTH = 50;
 
     // add any constants you think you may use
+    public static final int AWARDS_POS = 3;
 }

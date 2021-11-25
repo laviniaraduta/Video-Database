@@ -1,14 +1,20 @@
 package queries;
 
 import actor.Actor;
+import common.Constants;
 import databases.ActorDatabase;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Comparator;
 
-import static utils.Utils.*;
+import static utils.Utils.formNameList;
+import static utils.Utils.formNameListInteger;
 
 public final class ActorQuery extends Query {
     private List<List<String>> filters;
@@ -43,7 +49,7 @@ public final class ActorQuery extends Query {
             message = message + names;
 
         } else if (this.getCriteria().equals("awards")) {
-            List<String> mentionedAwards = this.filters.get(3);
+            List<String> mentionedAwards = this.filters.get(Constants.AWARDS_POS);
             Map<String, Integer> actorsAwards = new HashMap<>();
             for (Actor a : ad.getActors()) {
                 int numAwards = a.getMentionedAwards(mentionedAwards);

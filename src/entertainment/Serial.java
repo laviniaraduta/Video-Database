@@ -18,9 +18,9 @@ public final class Serial extends Video {
         this.seasons = seasons;
     }
 
-    public Serial (Serial s) {
+    public Serial(final Serial s) {
         super(s.getName(), s.getYear(), s.getCast(), s.getGenres());
-        this.rating = s.getRating();
+        this.setRating(s.getRating());
         this.numberOfSeasons = s.getNumberOfSeasons();
         this.seasons = s.seasons;
         this.ratingPerSeason = s.getRatingPerSeason();
@@ -34,10 +34,6 @@ public final class Serial extends Video {
         this.numberOfSeasons = numberOfSeasons;
     }
 
-
-    public Double getRating() {
-        return this.rating;
-    }
 
     /**
      *
@@ -60,9 +56,9 @@ public final class Serial extends Video {
             index++;
         }
         if (totalSum.equals(0d)) {
-            this.rating = 0d;
+            this.setRating(0d);
         } else {
-            this.rating = (Double) (totalSum / this.numberOfSeasons);
+            this.setRating((Double) (totalSum / this.numberOfSeasons));
         }
     }
 

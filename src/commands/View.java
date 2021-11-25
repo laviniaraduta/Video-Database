@@ -3,8 +3,6 @@ package commands;
 import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
-import entertainment.Movie;
-import entertainment.Serial;
 import user.User;
 
 import java.util.Map;
