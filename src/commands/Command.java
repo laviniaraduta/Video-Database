@@ -4,6 +4,9 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 
+/**
+ * The parent class for all the 3 command actions
+ */
 public abstract class Command {
     private int actionId;
     private String actionType;
@@ -60,10 +63,11 @@ public abstract class Command {
     }
 
     /**
-     * @param ud
-     * @param md
-     * @param sd
-     * @return
+     * Method that implements the command's action
+     * @param ud the database containing all the users
+     * @param md the database containing all the movies
+     * @param sd the database containing all the shows
+     * @return a string representing the final output of the command
      */
     public abstract String commandMethod(UserDatabase ud, MovieDatabase md, SerialDatabase sd);
 }

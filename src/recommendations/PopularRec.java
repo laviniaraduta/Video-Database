@@ -1,5 +1,6 @@
 package recommendations;
 
+import common.Constants;
 import databases.UserDatabase;
 import databases.VideoDatabase;
 import entertainment.Genre;
@@ -23,30 +24,33 @@ public final class PopularRec extends Recommendation {
 
     @Override
     public String recommendationMethod(final UserDatabase ud, final VideoDatabase vd) {
-        List<Genre> genres = List.of(Genre.values());
-        Map<Genre, Integer> genresWithViews = new HashMap<>();
-        for (Genre genre : genres) {
-            int numOfViews = 0;
-            for (Video v : vd.getVideoList()) {
-                for (String g : v.getGenres()) {
-                    Genre gen = stringToGenre(g);
-                    if (gen.equals(genre)) {
-                        numOfViews += v.getViews();
+        User u = ud.getUserByUsername(this.getUsername());
+        if (u.getSubscription().equals(Constants.PREMIUM)) {
+            List<Genre> genres = List.of(Genre.values());
+            Map<Genre, Integer> genresWithViews = new HashMap<>();
+            for (Genre genre : genres) {
+                int numOfViews = 0;
+                for (Video v : vd.getVideoList()) {
+                    for (String g : v.getGenres()) {
+                        Genre gen = stringToGenre(g);
+                        if (gen.equals(genre)) {
+                            numOfViews += v.getViews();
+                        }
                     }
                 }
+                genresWithViews.put(genre, numOfViews);
             }
-            genresWithViews.put(genre, numOfViews);
-        }
-        User user = ud.getUserByUsername(this.getUsername());
-        List<Map.Entry<Genre, Integer>> sortedGenres =
-                sortByComparatorGenres(genresWithViews, false);
-        for (Map.Entry<Genre, Integer> entry : sortedGenres) {
-            Genre genre = entry.getKey();
-            for (Video v : vd.getVideoList()) {
-                for (String g : v.getGenres()) {
-                    Genre gen = stringToGenre(g);
-                    if (gen.equals(genre) && !user.getHistory().containsKey(v.getName())) {
-                        return "PopularRecommendation result: " + v.getName();
+            User user = ud.getUserByUsername(this.getUsername());
+            List<Map.Entry<Genre, Integer>> sortedGenres =
+                    sortByComparatorGenres(genresWithViews, false);
+            for (Map.Entry<Genre, Integer> entry : sortedGenres) {
+                Genre genre = entry.getKey();
+                for (Video v : vd.getVideoList()) {
+                    for (String g : v.getGenres()) {
+                        Genre gen = stringToGenre(g);
+                        if (gen.equals(genre) && !user.getHistory().containsKey(v.getName())) {
+                            return "PopularRecommendation result: " + v.getName();
+                        }
                     }
                 }
             }

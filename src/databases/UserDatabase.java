@@ -11,7 +11,8 @@ public final class UserDatabase {
     private ArrayList<User> users = new ArrayList<User>();
 
     /**
-     * @param usersList
+     * Populates the user database with users read from a file
+     * @param usersList the list of users read from the file
      */
     public void addUsers(final List<UserInputData> usersList) {
         for (UserInputData u : usersList) {
@@ -32,8 +33,9 @@ public final class UserDatabase {
     }
 
     /**
-     * @param username
-     * @return
+     * Returns the user with the username given from the database
+     * @param username the username
+     * @return the user found, null otherwise
      */
     public User getUserByUsername(final String username) {
         for (User u : this.users) {

@@ -12,7 +12,8 @@ public final class ActorDatabase {
     private ArrayList<Actor> actors = new ArrayList<Actor>();
 
     /**
-     * @param actorsList
+     * Populates the actor database with actors read from a file
+     * @param actorsList list of actors read from a file
      */
     public void addActors(final List<ActorInputData> actorsList) {
         for (ActorInputData a : actorsList) {

@@ -1,5 +1,6 @@
 package recommendations;
 
+import common.Constants;
 import databases.UserDatabase;
 import databases.VideoDatabase;
 import entertainment.Video;
@@ -13,19 +14,23 @@ public final class FavoriteRec extends Recommendation {
 
     @Override
     public String recommendationMethod(final UserDatabase ud, final VideoDatabase vd) {
-        String message = "FavoriteRecommendation ";
-        String result = null;
-        User user = ud.getUserByUsername(this.getUsername());
-        for (Video v : vd.getVideosByLikes()) {
-            if (!user.getHistory().containsKey(v.getName()) && v.getLikes() != 0) {
-                result = v.getName();
-                break;
+        User u = ud.getUserByUsername(this.getUsername());
+        if (u.getSubscription().equals(Constants.PREMIUM)) {
+            String message = "FavoriteRecommendation ";
+            String result = null;
+            User user = ud.getUserByUsername(this.getUsername());
+            for (Video v : vd.getVideosByLikes()) {
+                if (!user.getHistory().containsKey(v.getName()) && v.getLikes() != 0) {
+                    result = v.getName();
+                    break;
+                }
+            }
+            if (result != null) {
+                return message + "result: " + result;
+            } else {
+                return message + "cannot be applied!";
             }
         }
-        if (result != null) {
-            return message + "result: " + result;
-        } else {
-            return message + "cannot be applied!";
-        }
+        return "FavoriteRecommendation cannot be applied!";
     }
 }

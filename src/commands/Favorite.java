@@ -18,8 +18,6 @@ public final class Favorite extends Command {
                                 final SerialDatabase sd) {
         String message;
         User user = ud.getUserByUsername(this.getUser());
-//        Movie movie = md.getMovieByTitle(this.getTitle());
-//        Serial serial = sd.getSerialByTitle(this.getTitle());
         Map<String, Integer> history = user.getHistory();
         if (history.containsKey(this.getTitle())) {
             Boolean isAlreadyFav = false;

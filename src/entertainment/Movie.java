@@ -28,7 +28,7 @@ public final class Movie extends Video {
     }
 
     /**
-     *
+     * Computes the average rating for the movie from the list of ratings
      */
     public void setRating() {
         Double sum = 0d;
@@ -49,9 +49,8 @@ public final class Movie extends Video {
         this.ratings = ratings;
     }
 
-
-
     /**
+     * Adds a rating to the ratings list of the movie
      * @param newRating
      */
     public void addRating(final Double newRating) {

@@ -3,6 +3,9 @@ package recommendations;
 import databases.UserDatabase;
 import databases.VideoDatabase;
 
+/**
+ * The parent class for all the recommendation actions
+ */
 public abstract class Recommendation {
     private int actionId;
     private String actionType;
@@ -50,8 +53,9 @@ public abstract class Recommendation {
     }
 
     /**
-     * @param ud
-     * @param vd
+     * Method that implements the recommendation action
+     * @param ud database containing all the users
+     * @param vd database containing all the videos
      * @return
      */
     public abstract String recommendationMethod(UserDatabase ud, VideoDatabase vd);

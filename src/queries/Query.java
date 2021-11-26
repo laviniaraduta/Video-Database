@@ -5,6 +5,9 @@ import databases.MovieDatabase;
 import databases.SerialDatabase;
 import databases.UserDatabase;
 
+/**
+ * The parent class for the Query actions
+ */
 public abstract class Query {
     private int actionId;
     private String actionType;
@@ -83,11 +86,12 @@ public abstract class Query {
     }
 
     /**
-     * @param ad
-     * @param ud
-     * @param md
-     * @param sd
-     * @return
+     * The method that implements the query action
+     * @param ad database containing all actors
+     * @param ud database containing all users
+     * @param md database containing all movies
+     * @param sd database containing all serials
+     * @return a string representing the output of the action
      */
     public abstract String queryMethod(ActorDatabase ad, UserDatabase ud,
                                        MovieDatabase md, SerialDatabase sd);

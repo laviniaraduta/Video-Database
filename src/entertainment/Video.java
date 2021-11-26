@@ -67,6 +67,10 @@ public class Video {
         return this.likes;
     }
 
+    /**
+     * Computes the total number of likes for a video
+     * @param ud the users database
+     */
     public final void setLikes(final UserDatabase ud) {
         int numOfLikes = 0;
         for (User u : ud.getUsers()) {
@@ -81,6 +85,10 @@ public class Video {
         return this.views;
     }
 
+    /**
+     * Computes the total number of views for a video
+     * @param ud the users database
+     */
     public final void setViews(final UserDatabase ud) {
         int numOfViews = 0;
         for (User u : ud.getUsers()) {

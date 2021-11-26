@@ -62,9 +62,10 @@ public final class Actor {
     }
 
     /**
-     * @param md
-     * @param sd
-     * @return
+     * Computes the average rating for the actor's total videos
+     * @param md the database containing all the movies
+     * @param sd the database containing all the shows
+     * @return double value representing the rating
      */
     public Double getTotalRating(final MovieDatabase md, final SerialDatabase sd) {
         Double ratingSum = 0d;
@@ -109,18 +110,13 @@ public final class Actor {
 
 
     /**
-     * @param mentionedAwards
-     * @return
+     * Verifies if the actor has achieved all the mentioned awards
+     * @param mentionedAwards list of the awards we search
+     * @return the total number of awards of the actor
      */
     public int getMentionedAwards(final List<String> mentionedAwards) {
-        int total = 0, number = mentionedAwards.size();
         for (String award : mentionedAwards) {
             ActorsAwards a = ActorsAwards.valueOf(award);
-//            if (this.getAwards().containsKey(a)) {
-//                total += this.getAwards().get(a);
-//            } else {
-//                return 0;
-//            }
             if (!this.getAwards().containsKey(a)) {
                 return 0;
             }
@@ -129,8 +125,9 @@ public final class Actor {
     }
 
     /**
-     * @param words
-     * @return
+     * Checks if the career description of the actor contains all the keywords
+     * @param words the list of words we search
+     * @return boolean that shows if the description contains all the words
      */
     public boolean hasWords(final List<String> words) {
         for (String w : words) {
