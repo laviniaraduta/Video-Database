@@ -1,40 +1,39 @@
 Raduta Lavinia-Maria 323CA
-Object Oriented Programming Course
-Homework - VideosDB
+# Object Oriented Programming Course
+## Homework - VideosDB
 
 November 2021
 
-# General idea of the program
-
-* In main, all the databases are populated using the input classes from fileio.
-* In the Action Database, for each action read, its type is determined and the
+### General idea of the program
+- In main, all the databases are populated using the input classes from fileio.
+- In the Action Database, for each action read, its type is determined and the
 corresponding class is instanced then its method is called.
 
-# ACTIONS:
-    -> COMMANDS:
-        * FAVORITE:
-            - firstly find the user that has the username given
-            - search in the user history if the video is already seen
-            - if it is not add the title in its favorite list
-            - if it already is favourite the command can't be applied
-        * VIEW:
-            - find the user
-            - if its history already contains the video, just increment
-            the number of views (the value for the key title)
-            - if it is not, put the video's title and 1 view in the history
-        * RATING:
-            - find the user and then search if the video is in the history
-            - if it is, search if the movie / show was already rated
-            - the user keeps a map for the movies he rated (also keeping
-            the rating) and for the series, it keeps a map for each series
-            rated, with the index of the season and the rating given
-            - if the video is not already rated:
-                - for movies: add the new rating to the ratings list and
+### ACTIONS:
+1. COMMANDS:
+* FAVORITE:
+    * firstly find the user that has the username given
+    * search in the user history if the video is already seen
+    * if it is not add the title in its favorite list
+    * if it already is favourite the command can't be applied
+* VIEW:
+    * find the user
+        -if its history already contains the video, just increment
+        -the number of views (the value for the key title)
+        -if it is not, put the video's title and 1 view in the history
+* RATING:
+    * find the user and then search if the video is in the history
+    * if it is, search if the movie / show was already rated
+    * the user keeps a map for the movies he rated (also keeping
+    the rating) and for the series, it keeps a map for each series
+    rated, with the index of the season and the rating given
+    * if the video is not already rated:
+            * for movies: add the new rating to the ratings list and
                 then calculate the new average rating
-                - for shows: add the rating to the map, corresponding to the
+            * for shows: add the rating to the map, corresponding to the
                 number of the season, calculate the average rate of each
                 season, and then update the average rating for the show
-            - if it is, the command can't be applied
+    * if it is, the command can't be applied
 
     -> QUERIES:
         * FOR ACTORS:
